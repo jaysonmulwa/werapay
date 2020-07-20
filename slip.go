@@ -17,7 +17,7 @@ const (
 
 const (
 	bannerHt = 52.0
-	xIndent  = 10.0
+	xIndent  = 20.0
 )
 
 
@@ -41,17 +41,12 @@ func main () {
 		{0, bannerHt },
 	}, "F")
 
-	// Banner - INVOICE
-	/*pdf.SetFont("arial", "B", 40)
-	pdf.SetTextColor(255, 255, 255)
-	_, lineHt := pdf.GetFontSize()
-	pdf.Text(xIndent, bannerHt-(bannerHt/2.0)+lineHt/3.1, "LOGO")*/
+	
 
 	// Banner - Logo
 	_, lineHt := pdf.GetFontSize()
 	pdf.Image("images/logo1.png", xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
 	
-
 
 
 	// Banner - Address
@@ -74,23 +69,33 @@ func main () {
 
 
 
-
-
-
-
-
-
-
 	//Content
 	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", "Jayson Mulwa")
 	summaryBlock(pdf, xIndent, bannerHt+lineHt*6.25, "ID No.", "00000000")
 
 
-	summaryBlock(pdf, xIndent*2.0+lineHt*12.5, bannerHt+lineHt*2.0, "Designation", "Software Engineer")
-	summaryBlock(pdf, xIndent*2.0+lineHt*12.5, bannerHt+lineHt*6.25, "KRA PIN", "0WA018AY9")
+	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", "Software Engineer")
+	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*6.25, "KRA PIN", "0WA018AY9")
 
-	summaryBlock(pdf, xIndent*4.0+lineHt*25, bannerHt+lineHt*2.0, "Department", "IT")
-	summaryBlock(pdf, xIndent*4.0+lineHt*25, bannerHt+lineHt*6.25, "Payroll No.", "29A2018")
+	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*2.0, "Department", "IT")
+	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*6.25, "Payroll No.", "29A2018")
+
+	//Line Items - Paycodes
+
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5, "Basic Pay", "100,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+2*lineHt, "Commuter Allowance", "10,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+4*lineHt, "House Allowance", "10,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+6*lineHt, "Other Allowance", "10,000")
+
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+8*lineHt, "PAYE", "100,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+10*lineHt, "NHIF", "10,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+12*lineHt, "NSSF", "10,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+14*lineHt, "Sacco Contribution 1", "10,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+16*lineHt, "Sacco Contribution 2", "10,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+18*lineHt, "Bank Loan 1", "100,000")
+	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+20*lineHt, "Bank Loan 2", "100,000")
+
+
 
 
 
@@ -98,8 +103,8 @@ func main () {
 	//Bottom Accent
 	pdf.Polygon([]gofpdf.PointType{
 		{0, h},
-		{0, h - (bannerHt * 0.5)},
-		{w, h - (bannerHt * 0.5)},
+		{0, h - (bannerHt * 0.25)},
+		{w, h - (bannerHt * 0.25)},
 		{w, h},
 	}, "F")
 
@@ -135,8 +140,28 @@ func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) 
 }
 
 
+func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string){
+	w, _:= pdf.GetPageSize()
+	pdf.SetFont("arial", "", 12)
+	pdf.SetTextColor(50, 50, 50)
+	_, lineHt := pdf.GetFontSize()
+	y = y + lineHt
+	pdf.Text(x, y, paycode)
+
+
+	
+	pdf.SetTextColor(50, 50, 50)
+	pdf.Text((w-xIndent*4), y, amount)
+	
+
+}
+
 func drawGrid(pdf *gofpdf.Fpdf) {
 	w, h := pdf.GetPageSize()
+
+	//pageSize(pdf, true, true)
+
+
 	pdf.SetFont("arial", "", 12)
 	pdf.SetTextColor(80, 80, 80)
 	pdf.SetDrawColor(200, 200, 200)
@@ -156,3 +181,42 @@ func drawGrid(pdf *gofpdf.Fpdf) {
 		pdf.Text(0, y, fmt.Sprintf("%d", int(y)))
 	}
 }
+
+
+/*func pageSize(pdf *gofpdf.Fpdf, w bool, h bool) (float64, float64) {
+
+	if w == true && h == true{
+
+		
+		x, y := pdf.GetPageSize()
+
+		return x, y
+	}
+
+
+	if w != true && h == true{
+
+		_, y := pdf.GetPageSize()
+
+		return _, y
+
+	}
+
+	if w == true && h != true{
+
+		x, _ := pdf.GetPageSize()
+
+		return x, _
+
+	} 
+
+	if w != true && h != true{
+
+		_, _ := pdf.GetPageSize()
+
+		return _, _
+
+	} 
+
+	
+}*/
