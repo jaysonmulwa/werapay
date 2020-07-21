@@ -16,18 +16,109 @@ const (
 )
 
 const (
-	bannerHt = 52.0
+	bannerHt = 42.0
 	xIndent  = 20.0
 )
 
 
 
 
+
+type LineItemsType struct {
+
+	/*TypeName string
+
+	Totals float64
+
+	HasTotal bool*/
+
+	items []LineItems
+
+
+}
+
+
+type LineItems struct {
+
+	name string
+	amount float64
+
+}
+
+
+
+
+
+
+
 func main () {
+
+	list := LineItemsType {
+
+		items: []LineItems {
+
+			LineItems{
+
+				name: "Earnings",
+
+				amount: 100.0,
+
+			},
+
+			LineItems{
+
+				name: "Earnings",
+
+				amount:100.0,
+
+			},
+
+
+
+		},
+	}
+
+	fmt.Println(list)
+
+
+
+
+	/*lineItemsList := LineItemsType {
+
+		TypeName: "Earnings",
+
+		Totals: 0.0,
+
+		HasTotal: true,
+
+		Items: LineItems {
+
+			name: "Basic Pay",
+
+			amount: 50000.0,
+
+
+		},{
+
+
+			name: "Commuter Allowance",
+
+			amount: 10000.0,
+
+
+
+		},
+
+
+	}*/
+
+
+
+
 
 	pdf := gofpdf.New("P", "mm", "A4", "")
 
-	w, h := pdf.GetPageSize()
+	w, _ := pdf.GetPageSize()
 
 	pdf.AddPage()
 	pdf.SetFont("arial", "B", 16)
@@ -71,29 +162,50 @@ func main () {
 
 	//Content
 	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", "Jayson Mulwa")
-	summaryBlock(pdf, xIndent, bannerHt+lineHt*6.25, "ID No.", "00000000")
+	summaryBlock(pdf, xIndent, bannerHt+lineHt*5.25, "ID No.", "00000000")
 
 
 	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", "Software Engineer")
-	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*6.25, "KRA PIN", "0WA018AY9")
+	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*5.25, "KRA PIN", "0WA018AY9")
 
 	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*2.0, "Department", "IT")
-	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*6.25, "Payroll No.", "29A2018")
+	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*5.25, "Payroll No.", "29A2018")
 
-	//Line Items - Paycodes
+	//payCodesTitle()
 
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5, "Basic Pay", "100,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+2*lineHt, "Commuter Allowance", "10,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+4*lineHt, "House Allowance", "10,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+6*lineHt, "Other Allowance", "10,000")
+	payCodesTitle(pdf, xIndent*2.5,  bannerHt+lineHt*10.5-2*lineHt*0.75, "Earnings")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5, "Basic Pay", "100,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+2*lineHt*0.75, "Commuter Allowance", "10,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+4*lineHt*0.75, "House Allowance", "10,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+6*lineHt*0.75, "Other Allowance", "10,000")
+	payCodesTotals(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+8*lineHt*0.75, "Gross Pay", "10,000")
 
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+8*lineHt, "PAYE", "100,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+10*lineHt, "NHIF", "10,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+12*lineHt, "NSSF", "10,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+14*lineHt, "Sacco Contribution 1", "10,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+16*lineHt, "Sacco Contribution 2", "10,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+18*lineHt, "Bank Loan 1", "100,000")
-	payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*12.5+20*lineHt, "Bank Loan 2", "100,000")
+	payCodesTitle(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+10*lineHt*0.75, "Deductions")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+12*lineHt*0.75, "PAYE", "100,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+14*lineHt*0.75, "NHIF", "10,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+16*lineHt*0.75, "NSSF", "10,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+18*lineHt*0.75, "Sacco Contribution 1", "10,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+20*lineHt*0.75, "Sacco Contribution 2", "10,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+22*lineHt*0.75, "Bank Loan 1", "100,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+24*lineHt*0.75, "Bank Loan 2", "100,000")
+	payCodesTotals(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+26*lineHt*0.75, "Total Dedeuctions", "10,000")
+
+
+
+
+	payCodesTitle(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+28*lineHt*0.75, "Tax Details")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+30*lineHt*0.75, "Taxable Pay", "100,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+32*lineHt*0.75, "Tax Charges", "10,000")
+		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+34*lineHt*0.75, "Tax Relief", "10,000")
+
+
+	payCodesTotals(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+36*lineHt*0.75, "Netpay", "10,000")
+
+
+
+	
+
+
 
 
 
@@ -101,17 +213,26 @@ func main () {
 
 
 	//Bottom Accent
-	pdf.Polygon([]gofpdf.PointType{
+	/*pdf.Polygon([]gofpdf.PointType{
 		{0, h},
 		{0, h - (bannerHt * 0.25)},
 		{w, h - (bannerHt * 0.25)},
 		{w, h},
-	}, "F")
+	}, "F")*/
+
+	//Footer Notes
+
+	pdf.SetFont("arial", "", 12)
+	pdf.SetTextColor(180, 180, 180)
+	pdf.Text(xIndent, 290, "Signature:")
+	pdf.Line(43, 290, 105, 290)
+	pdf.Text(w/2 + xIndent/2, 290, "Bank:")
+	pdf.Line(136, 290, w-xIndent, 290)
 
 
 	
 
-	drawGrid(pdf)
+	//drawGrid(pdf)
 
 	err := pdf.OutputFileAndClose("payslip.pdf")
 
@@ -152,14 +273,48 @@ func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string){
 	
 	pdf.SetTextColor(50, 50, 50)
 	pdf.Text((w-xIndent*4), y, amount)
+	//pdf.CellFormat(20, , amount, gofpdf.BorderNone, gofpdf.LineBreakNone, gofpdf.AlignRight, false, 0, "")
 	
 
 }
 
+func payCodesTitle(pdf *gofpdf.Fpdf, x, y float64, paycode string) {
+
+	//w, _:= pdf.GetPageSize()
+	pdf.SetFont("arial", "", 12)
+	pdf.SetTextColor(50, 50, 50)
+	_, lineHt := pdf.GetFontSize()
+	y = y + lineHt
+	pdf.Text(x-10, y, paycode)
+
+	
+
+
+}
+
+func payCodesTotals(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
+
+	w, _:= pdf.GetPageSize()
+	pdf.SetFont("arial", "", 12)
+	pdf.SetTextColor(50, 50, 50)
+	_, lineHt := pdf.GetFontSize()
+	y = y + lineHt
+	pdf.Text(x-10, y, paycode)
+
+
+	
+	pdf.SetTextColor(50, 50, 50)
+	pdf.Text((w-xIndent*4), y, amount)
+
+	
+
+
+}
+
+
+
 func drawGrid(pdf *gofpdf.Fpdf) {
 	w, h := pdf.GetPageSize()
-
-	//pageSize(pdf, true, true)
 
 
 	pdf.SetFont("arial", "", 12)
@@ -182,41 +337,3 @@ func drawGrid(pdf *gofpdf.Fpdf) {
 	}
 }
 
-
-/*func pageSize(pdf *gofpdf.Fpdf, w bool, h bool) (float64, float64) {
-
-	if w == true && h == true{
-
-		
-		x, y := pdf.GetPageSize()
-
-		return x, y
-	}
-
-
-	if w != true && h == true{
-
-		_, y := pdf.GetPageSize()
-
-		return _, y
-
-	}
-
-	if w == true && h != true{
-
-		x, _ := pdf.GetPageSize()
-
-		return x, _
-
-	} 
-
-	if w != true && h != true{
-
-		_, _ := pdf.GetPageSize()
-
-		return _, _
-
-	} 
-
-	
-}*/
