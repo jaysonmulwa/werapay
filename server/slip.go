@@ -1,18 +1,16 @@
 package main
 
 import (
-
-	"github.com/jung-kurt/gofpdf"
 	"fmt"
-
+	"github.com/jung-kurt/gofpdf"
+	"github.com/gofiber/fiber"	
+	"github.com/jinzhu/gorm"
+	
 )
 
 const (
-
 	month = "JANUARY"
-	year = "2020"
-
-
+	year  = "2020"
 )
 
 const (
@@ -20,101 +18,141 @@ const (
 	xIndent  = 20.0
 )
 
+var (
 
+	DBConn *gorm.DB
 
+)
 
 
 type LineItemsType struct {
-
-	/*TypeName string
+	TypeName string
 
 	Totals float64
 
-	HasTotal bool*/
+	HasTotal bool
 
 	items []LineItems
-
-
 }
-
 
 type LineItems struct {
-
-	name string
+	name   string
 	amount float64
+}
+
+
+
+func setupRoutes(app *fiber.App){
+
+	app.Get("/api/v1/personalslip", personalSlip)
 
 }
 
 
 
+func main() {
+
+	//server
+
+	app := fiber.New()
+
+	setupRoutes(app)
+
+	app.Listen(8000)
 
 
+}
+
+func personalSlip(c *fiber.Ctx){
 
 
-func main () {
+	
 
-	list := LineItemsType {
+	earnings := []LineItemsType{
 
-		items: []LineItems {
+		LineItemsType{
 
-			LineItems{
+			TypeName: "Earnings",
 
-				name: "Earnings",
+			Totals: 0.0,
 
-				amount: 100.0,
+			HasTotal: true,
 
+			items: []LineItems{
+
+				LineItems{
+
+					name: "Basic Pay",
+
+					amount: 100.0,
+				},
+
+				LineItems{
+
+					name: "Commuter Allowance",
+
+					amount: 100.0,
+				},
 			},
+		},
+		LineItemsType{
 
-			LineItems{
+			TypeName: "Earnings",
 
-				name: "Earnings",
+			Totals: 0.0,
 
-				amount:100.0,
+			HasTotal: true,
 
+			items: []LineItems{
+
+				LineItems{
+
+					name: "Basic Pay",
+
+					amount: 100.0,
+				},
+
+				LineItems{
+
+					name: "Commuter Allowance",
+
+					amount: 100.0,
+				},
 			},
-
-
-
 		},
 	}
 
-	fmt.Println(list)
+	deductions := LineItemsType{
 
-
-
-
-	/*lineItemsList := LineItemsType {
-
-		TypeName: "Earnings",
+		TypeName: "Deductions",
 
 		Totals: 0.0,
 
 		HasTotal: true,
 
-		Items: LineItems {
+		items: []LineItems{
 
-			name: "Basic Pay",
+			LineItems{
 
-			amount: 50000.0,
+				name: "NHIF",
 
+				amount: 100.0,
+			},
 
-		},{
+			LineItems{
 
+				name: "NSSF",
 
-			name: "Commuter Allowance",
-
-			amount: 10000.0,
-
-
-
+				amount: 100.0,
+			},
 		},
+	}
 
+	fmt.Println(earnings)
 
-	}*/
+	fmt.Println(deductions)
 
-
-
-
+	
 
 	pdf := gofpdf.New("P", "mm", "A4", "")
 
@@ -124,21 +162,17 @@ func main () {
 	pdf.SetFont("arial", "B", 16)
 
 	// Top Banner
-	pdf.SetFillColor(0,191,255)
+	pdf.SetFillColor(0, 191, 255)
 	pdf.Polygon([]gofpdf.PointType{
 		{0, 0},
 		{w, 0},
 		{w, bannerHt},
-		{0, bannerHt },
+		{0, bannerHt},
 	}, "F")
-
-	
 
 	// Banner - Logo
 	_, lineHt := pdf.GetFontSize()
 	pdf.Image("images/logo1.png", xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
-	
-
 
 	// Banner - Address
 	pdf.SetFont("arial", "", 12)
@@ -147,23 +181,18 @@ func main () {
 	pdf.MoveTo(w-xIndent-124.0, (bannerHt-(lineHt*1.5*3.0))/2.0)
 	pdf.MultiCell(124.0, lineHt*1.5, "P.O. Box 62345 - 00200 Nairobi, Harambee Ave, Nairobi\nNairobi, Kenya\n12345", gofpdf.BorderNone, gofpdf.AlignRight, false)
 
-
 	//Header - Payslip (month)
 
 	pdf.SetFont("arial", "", 16)
 	pdf.SetTextColor(180, 180, 180)
-	
+
 	_, lineHt = pdf.GetFontSize()
 
 	pdf.Text(w/3, bannerHt+lineHt*1.0, "PAYSLIP FOR JANUARY 2020")
 
-
-
-
 	//Content
 	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", "Jayson Mulwa")
 	summaryBlock(pdf, xIndent, bannerHt+lineHt*5.25, "ID No.", "00000000")
-
 
 	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", "Software Engineer")
 	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*5.25, "KRA PIN", "0WA018AY9")
@@ -173,44 +202,29 @@ func main () {
 
 	//payCodesTitle()
 
-	payCodesTitle(pdf, xIndent*2.5,  bannerHt+lineHt*10.5-2*lineHt*0.75, "Earnings")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5, "Basic Pay", "100,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+2*lineHt*0.75, "Commuter Allowance", "10,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+4*lineHt*0.75, "House Allowance", "10,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+6*lineHt*0.75, "Other Allowance", "10,000")
-	payCodesTotals(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+8*lineHt*0.75, "Gross Pay", "10,000")
+	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5-2*lineHt*0.75, "Earnings")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5, "Basic Pay", "100,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+2*lineHt*0.75, "Commuter Allowance", "10,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+4*lineHt*0.75, "House Allowance", "10,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+6*lineHt*0.75, "Other Allowance", "10,000")
+	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+8*lineHt*0.75, "Gross Pay", "10,000")
 
-	payCodesTitle(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+10*lineHt*0.75, "Deductions")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+12*lineHt*0.75, "PAYE", "100,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+14*lineHt*0.75, "NHIF", "10,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+16*lineHt*0.75, "NSSF", "10,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+18*lineHt*0.75, "Sacco Contribution 1", "10,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+20*lineHt*0.75, "Sacco Contribution 2", "10,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+22*lineHt*0.75, "Bank Loan 1", "100,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+24*lineHt*0.75, "Bank Loan 2", "100,000")
-	payCodesTotals(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+26*lineHt*0.75, "Total Dedeuctions", "10,000")
+	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5+10*lineHt*0.75, "Deductions")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+12*lineHt*0.75, "PAYE", "100,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+14*lineHt*0.75, "NHIF", "10,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+16*lineHt*0.75, "NSSF", "10,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+18*lineHt*0.75, "Sacco Contribution 1", "10,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+20*lineHt*0.75, "Sacco Contribution 2", "10,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+22*lineHt*0.75, "Bank Loan 1", "100,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+24*lineHt*0.75, "Bank Loan 2", "100,000")
+	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+26*lineHt*0.75, "Total Dedeuctions", "10,000")
 
+	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5+28*lineHt*0.75, "Tax Details")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+30*lineHt*0.75, "Taxable Pay", "100,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+32*lineHt*0.75, "Tax Charges", "10,000")
+	payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+34*lineHt*0.75, "Tax Relief", "10,000")
 
-
-
-	payCodesTitle(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+28*lineHt*0.75, "Tax Details")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+30*lineHt*0.75, "Taxable Pay", "100,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+32*lineHt*0.75, "Tax Charges", "10,000")
-		payCodes(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+34*lineHt*0.75, "Tax Relief", "10,000")
-
-
-	payCodesTotals(pdf, xIndent*2.5,  bannerHt+lineHt*10.5+36*lineHt*0.75, "Netpay", "10,000")
-
-
-
-	
-
-
-
-
-
-
-
+	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+36*lineHt*0.75, "Netpay", "10,000")
 
 	//Bottom Accent
 	/*pdf.Polygon([]gofpdf.PointType{
@@ -226,11 +240,8 @@ func main () {
 	pdf.SetTextColor(180, 180, 180)
 	pdf.Text(xIndent, 290, "Signature:")
 	pdf.Line(43, 290, 105, 290)
-	pdf.Text(w/2 + xIndent/2, 290, "Bank:")
+	pdf.Text(w/2+xIndent/2, 290, "Bank:")
 	pdf.Line(136, 290, w-xIndent, 290)
-
-
-	
 
 	//drawGrid(pdf)
 
@@ -242,6 +253,9 @@ func main () {
 		panic(err)
 
 	}
+
+
+	c.Send("Works")
 
 }
 
@@ -260,21 +274,17 @@ func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) 
 	return x, y
 }
 
-
-func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string){
-	w, _:= pdf.GetPageSize()
+func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
+	w, _ := pdf.GetPageSize()
 	pdf.SetFont("arial", "", 12)
 	pdf.SetTextColor(50, 50, 50)
 	_, lineHt := pdf.GetFontSize()
 	y = y + lineHt
 	pdf.Text(x, y, paycode)
 
-
-	
 	pdf.SetTextColor(50, 50, 50)
-	pdf.Text((w-xIndent*4), y, amount)
+	pdf.Text((w - xIndent*4), y, amount)
 	//pdf.CellFormat(20, , amount, gofpdf.BorderNone, gofpdf.LineBreakNone, gofpdf.AlignRight, false, 0, "")
-	
 
 }
 
@@ -287,35 +297,24 @@ func payCodesTitle(pdf *gofpdf.Fpdf, x, y float64, paycode string) {
 	y = y + lineHt
 	pdf.Text(x-10, y, paycode)
 
-	
-
-
 }
 
 func payCodesTotals(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
 
-	w, _:= pdf.GetPageSize()
+	w, _ := pdf.GetPageSize()
 	pdf.SetFont("arial", "", 12)
 	pdf.SetTextColor(50, 50, 50)
 	_, lineHt := pdf.GetFontSize()
 	y = y + lineHt
 	pdf.Text(x-10, y, paycode)
 
-
-	
 	pdf.SetTextColor(50, 50, 50)
-	pdf.Text((w-xIndent*4), y, amount)
-
-	
-
+	pdf.Text((w - xIndent*4), y, amount)
 
 }
 
-
-
 func drawGrid(pdf *gofpdf.Fpdf) {
 	w, h := pdf.GetPageSize()
-
 
 	pdf.SetFont("arial", "", 12)
 	pdf.SetTextColor(80, 80, 80)
@@ -336,4 +335,3 @@ func drawGrid(pdf *gofpdf.Fpdf) {
 		pdf.Text(0, y, fmt.Sprintf("%d", int(y)))
 	}
 }
-
