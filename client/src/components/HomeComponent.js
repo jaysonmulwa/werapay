@@ -1,5 +1,5 @@
 import React, { Component, lazy, Suspense} from "react";
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Fade } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Fade, Card, CardTitle } from 'reactstrap';
 
 
 
@@ -87,13 +87,123 @@ handleSubmit = (event) => {
 						<div>
 						<NavComponentLazy />
 						<JumboComponentLazy />
-						<Container>
+						<Container className="my-4" >
 							
 							<Row>
 						        <Col md={{ size: 8, offset: 2 }}>
 
+								<Card body>
+								<CardTitle>Company Details</CardTitle>
 
-						        <h5>Earnings</h5>
+
+
+									<Form onSubmit={this.handleSubmit}>
+
+										
+
+
+
+
+								      <FormGroup>
+								       
+
+
+									        <Row>
+
+
+									        <Col md="12" className="my-2"><Input type="paycode" name="paycode" id="paycode" placeholder="Company Name" onChange={this.onChange}/> </Col>
+
+									        <Col md="12" className="my-2"><Input type="amount" name="amount" id="amount" placeholder="Company Address" onChange={this.onChange}/> </Col>
+
+									        </Row>
+
+								      </FormGroup>
+								      		
+								      		<Button value="add more" onClick={this.addClick.bind(this)}>Add</Button> 
+
+								      		<Button className="mx-4" type="submit">Submit</Button>
+
+								      
+								    </Form>
+
+									</Card>
+
+								
+
+						        </Col>
+						        
+						    </Row>
+					    </Container>
+						<Container className="my-4" >
+							
+							<Row>
+						        <Col md={{ size: 8, offset: 2 }}>
+
+								<Card body>
+								<CardTitle>Personal Details</CardTitle>
+
+
+
+									<Form onSubmit={this.handleSubmit}>
+
+										
+
+
+
+
+								      <FormGroup>
+								       
+
+
+									        <Row>
+
+
+									        <Col md="12" className="my-2"><Input type="paycode" name="paycode" id="paycode" placeholder="Full Name" onChange={this.onChange}/> </Col>
+
+									        <Col md="12" className="my-2"><Input type="amount" name="amount" id="amount" placeholder="ID Number" onChange={this.onChange}/> </Col>
+
+											<Col md="12" className="my-2"><Input type="paycode" name="paycode" id="paycode" placeholder="KRA PIN" onChange={this.onChange}/> </Col>
+
+									        <Col md="12" className="my-2"><Input type="amount" name="amount" id="amount" placeholder="Position" onChange={this.onChange}/> </Col>
+
+											<Col md="12" className="my-2"><Input type="amount" name="amount" id="amount" placeholder="Department" onChange={this.onChange}/> </Col>
+
+									      
+
+									        
+
+
+									        </Row>
+
+									        
+
+
+
+
+								      </FormGroup>
+								      		
+								      		<Button value="add more" onClick={this.addClick.bind(this)}>Add</Button> 
+
+								      		<Button className="mx-4" type="submit">Submit</Button>
+
+								      
+								    </Form>
+
+									</Card>
+
+								
+
+						        </Col>
+						        
+						    </Row>
+					    </Container>
+						<Container className="my-4" >
+							
+							<Row>
+						        <Col md={{ size: 8, offset: 2 }}>
+
+								<Card body>
+								<CardTitle>Earnings</CardTitle>
 
 
 
@@ -134,23 +244,134 @@ handleSubmit = (event) => {
 								      		
 								      		<Button value="add more" onClick={this.addClick.bind(this)}>Add</Button> 
 
-								      		<Button type="submit">Submit</Button>
-								      	
-								      		
+								      		<Button className="mx-4" type="submit">Submit</Button>
 
-
-								      	
-								      
-								     
 								      
 								    </Form>
 
+									</Card>
+
+								
+
+						        </Col>
+						        
+						    </Row>
+					    </Container>
+						<Container className="my-4" >
+							
+							<Row>
+						        <Col md={{ size: 8, offset: 2 }}>
+
+								<Card body>
+								<CardTitle>Deductions</CardTitle>
 
 
-			    
+
+									<Form onSubmit={this.handleSubmit}>
+
+										
 
 
 
+
+								      <FormGroup>
+								       
+
+
+									        <Row>
+
+
+									        <Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.onChange}/> </Col>
+
+									        <Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.onChange}/> </Col>
+
+									        <Col md="2"><Button>Remove</Button> </Col>
+
+									        
+
+
+									        </Row>
+
+									        
+
+
+
+
+								      </FormGroup>
+
+								      {this.createUI()} 
+
+								      		
+								      		<Button value="add more" onClick={this.addClick.bind(this)}>Add</Button> 
+
+								      		<Button className="mx-4" type="submit">Submit</Button>
+
+								      
+								    </Form>
+
+									</Card>
+
+								
+
+						        </Col>
+						        
+						    </Row>
+					    </Container>
+						<Container className="my-4">
+							
+							<Row>
+						        <Col md={{ size: 8, offset: 2 }}>
+
+								<Card body>
+								<CardTitle>Tax Details</CardTitle>
+
+
+
+									<Form onSubmit={this.handleSubmit}>
+
+										
+
+
+
+
+								      <FormGroup>
+								       
+
+
+									        <Row>
+
+
+									        <Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.onChange}/> </Col>
+
+									        <Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.onChange}/> </Col>
+
+									        <Col md="2"><Button>Remove</Button> </Col>
+
+									        
+
+
+									        </Row>
+
+									        
+
+
+
+
+								      </FormGroup>
+
+								      {this.createUI()} 
+
+								      		
+								      		<Button value="add more" onClick={this.addClick.bind(this)}>Add</Button> 
+
+								      		<Button className="mx-4" type="submit">Submit</Button>
+
+								      
+								    </Form>
+
+									</Card>
+
+								
 
 						        </Col>
 						        
