@@ -7,11 +7,8 @@ import {
   withRouter,
 } from "react-router-dom";
 
-
-
 import { createBrowserHistory } from "history";
 
-import logo from './logo.svg';
 import './App.css';
 
 
