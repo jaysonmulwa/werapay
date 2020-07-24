@@ -14,6 +14,8 @@ import './App.css';
 
 const history = createBrowserHistory();
 
+
+
 const HomeComponentLazy = lazy(() =>
   import("./components/HomeComponent.js")
 );

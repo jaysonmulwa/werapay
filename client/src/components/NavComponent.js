@@ -19,16 +19,26 @@ function NavComponent(props) {
 
     return (
         <div>
-        <Navbar color="light" light expand="md">
+        <Navbar color="primary" light expand="md">
           <NavbarBrand href="/">Wera Pay</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
+              
+              {/*<NavItem>
+                <NavLink href="https://github.com/jaysonmulwa/werapay">GitHub</NavLink>
+              </NavItem>*/}
+
+              <NavItem>
+                <NavLink href="#">Pricing</NavLink>
+              </NavItem>
+
               <NavItem>
                 <NavLink href="https://github.com/jaysonmulwa/werapay">About</NavLink>
               </NavItem>
+
               <NavItem>
-                <NavLink href="https://github.com/jaysonmulwa/werapay">GitHub</NavLink>
+                <NavLink href="tel:+254 743 10 5448">Contact Us</NavLink>
               </NavItem>
               
             </Nav>

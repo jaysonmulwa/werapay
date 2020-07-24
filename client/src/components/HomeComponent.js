@@ -1,5 +1,17 @@
-import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap';
+import React, { Component, lazy, Suspense} from "react";
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Fade } from 'reactstrap';
+
+
+
+const NavComponentLazy = lazy(() =>
+  import("./NavComponent.js")
+);
+
+const JumboComponentLazy = lazy(() =>
+  import("./JumboComponent.js")
+);
+
+
 
 class HomeComponent extends Component {
 
@@ -22,19 +34,21 @@ createUI(){
 
          	 <FormGroup>
     	    
-    	    <Row>
+			<Fade in={true} out={true} tag="h5" className="mt-3">
+					<Row>
 
 
-		        <Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.handleChange.bind(this, i)} /> </Col>
+						<Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.handleChange.bind(this, i)} /> </Col>
 
-		        <Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.onChange}/> </Col>
+						<Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.onChange}/> </Col>
 
-		        <Col md="2"><Button type='button' value='remove' onClick={this.removeClick.bind(this, i)}>Remove</Button> </Col>
+						<Col md="2"><Button type='button' value='remove' onClick={this.removeClick.bind(this, i)}>Remove</Button> </Col>
 
-									        
+												
 
 
-			</Row>
+					</Row>
+			</Fade>
 
 			 </FormGroup>
 
@@ -69,7 +83,12 @@ handleSubmit = (event) => {
 
 	render() {
 			return (
+						
+						<div>
+						<NavComponentLazy />
+						<JumboComponentLazy />
 						<Container>
+							
 							<Row>
 						        <Col md={{ size: 8, offset: 2 }}>
 
@@ -137,6 +156,8 @@ handleSubmit = (event) => {
 						        
 						    </Row>
 					    </Container>
+
+						</div>
 				
 
 
