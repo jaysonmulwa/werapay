@@ -1,4 +1,5 @@
 import React, { Component, lazy, Suspense} from "react";
+import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Fade, Card, CardTitle } from 'reactstrap';
 
 
@@ -12,6 +13,7 @@ const JumboComponentLazy = lazy(() =>
 );
 
 
+let endpoint = "http://localhost:8000";
 
 class HomeComponent extends Component {
 
@@ -65,11 +67,6 @@ onChange = e =>{
 
 };
 
-
- /*let values = [...this.state.values];
-     values[i] = event.target.value;
-	 this.setState({ values });*/
-	 
 handleEarningsPaycodeChange(i, event) {
     
 	 let paycode_e = [...this.state.paycode_e];
@@ -146,11 +143,52 @@ handleTaxAmountChange(i, event) {
 
 handleSubmit = (event) => {
 
-	alert(this.state.fname + this.state.cname + this.state.caddr);
+	/*alert(this.state.fname + this.state.cname + this.state.caddr);
 	alert('A name was submitted: ' + this.state.paycode_e.join(', ') + ' ... ' + this.state.amount_e.join(', ') );
 	alert('A name was submitted: ' + this.state.paycode_d.join(', ') + ' ... ' + this.state.amount_d.join(', ') );
-	alert('A name was submitted: ' + this.state.paycode_t.join(', ') + ' ... ' + this.state.amount_t.join(', ') );
-    event.preventDefault();
+	alert('A name was submitted: ' + this.state.paycode_t.join(', ') + ' ... ' + this.state.amount_t.join(', ') );*/
+	event.preventDefault();
+	
+	const { cname, caddr, fname, idno, kra, position, dpt, payroll, paycode_e, amount_e, paycode_d, amount_d, paycode_t, amount_t,} = this.state;
+
+	//Create user object
+	const newSlip = {
+		cname,
+		caddr,
+		fname,
+		idno,
+		kra,
+		position,
+		dpt,
+		payroll,
+		paycode_e,
+		amount_e,
+		paycode_d,
+		amount_d,
+		paycode_t,
+		amount_t,
+	};
+
+		console.log(newSlip);
+
+		if(newSlip){
+
+			axios.post(
+					endpoint + "/api/v1/personalslip",
+					{
+					  newSlip
+					},
+					{
+					  headers: {
+						"Content-Type": "application/x-www-form-urlencoded"
+					  }
+					}
+				  )
+				  .then(res => {
+					console.log(res);
+				  });
+			  
+		}
     
 
   };
@@ -163,18 +201,17 @@ handleSubmit = (event) => {
 
 			 <FormGroup>
 		   
-		   <Fade in={true} out={true} tag="h5" className="mt-3">
-				   <Row>
+				<Fade in={true} out={true} tag="h5" className="mt-3">
+						<Row>
 
+							<Col md="5"><Input type="text" name="paycode" id="paycode" placeholder="Item" onChange={this.handleEarningsPaycodeChange.bind(this, i)} /> </Col>
 
-					   <Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.handleEarningsPaycodeChange.bind(this, i)} /> </Col>
+							<Col md="5"><Input type="number" name="amount" id="amount" placeholder="Amount" onChange={this.handleEarningsAmountChange.bind(this, i)}/> </Col>
 
-					   <Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.handleEarningsAmountChange.bind(this, i)}/> </Col>
+							<Col md="2"><Button type='button' outline color="danger" value='remove' onClick={this.removeClick_e.bind(this, i)}>Remove</Button> </Col>
 
-					   <Col md="2"><Button type='button' value='remove' onClick={this.removeClick_e.bind(this, i)}>Remove</Button> </Col>
-
-				   </Row>
-		   </Fade>
+						</Row>
+				</Fade>
 
 			</FormGroup>
 
@@ -192,11 +229,11 @@ handleSubmit = (event) => {
 				   <Row>
 
 
-					   <Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.handleDeductionsPaycodeChange.bind(this, i)} /> </Col>
+					   <Col md="5"><Input type="text" name="paycode" id="paycode" placeholder="Item" onChange={this.handleDeductionsPaycodeChange.bind(this, i)} /> </Col>
 
-					   <Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.handleDeductionsAmountChange.bind(this, i)}/> </Col>
+					   <Col md="5"><Input type="number" name="amount" id="amount" placeholder="Amount" onChange={this.handleDeductionsAmountChange.bind(this, i)}/> </Col>
 
-					   <Col md="2"><Button type='button' value='remove' onClick={this.removeClick_d.bind(this, i)}>Remove</Button> </Col>
+					   <Col md="2"><Button type='button' outline color="danger" value='remove' onClick={this.removeClick_d.bind(this, i)}>Remove</Button> </Col>
 
 				   </Row>
 		   </Fade>
@@ -217,11 +254,11 @@ handleSubmit = (event) => {
 				   <Row>
 
 
-					   <Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.handleTaxPaycodeChange.bind(this, i)} /> </Col>
+					   <Col md="5"><Input type="text" name="paycode" id="paycode" placeholder="Item" onChange={this.handleTaxPaycodeChange.bind(this, i)} /> </Col>
 
-					   <Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.handleTaxAmountChange.bind(this, i)}/> </Col>
+					   <Col md="5"><Input type="number" name="amount" id="amount" placeholder="Amount" onChange={this.handleTaxAmountChange.bind(this, i)}/> </Col>
 
-					   <Col md="2"><Button type='button' value='remove' onClick={this.removeClick_t.bind(this, i)}>Remove</Button> </Col>
+					   <Col md="2"><Button type='button' outline color="danger" value='remove' onClick={this.removeClick_t.bind(this, i)}>Remove</Button> </Col>
 
 				   </Row>
 		   </Fade>
@@ -264,10 +301,7 @@ handleSubmit = (event) => {
 
 								      </FormGroup>
 								      		
-								      		
-								      		<Button type="submit">Submit</Button>
 
-								      
 								    </Form>
 
 									</Card>
@@ -291,15 +325,13 @@ handleSubmit = (event) => {
 									<Form onSubmit={this.handleSubmit}>
 
 								      <FormGroup>
-								       
-
 
 									        <Row>
 
 
 									        <Col md="12" className="my-2"><Input type="text" name="fname" id="fname" placeholder="Full Name" onChange={this.onChange}/> </Col>
 
-									        <Col md="12" className="my-2"><Input type="text" name="idno" id="ino" placeholder="ID Number" onChange={this.onChange}/> </Col>
+									        <Col md="12" className="my-2"><Input type="number" name="idno" id="ino" placeholder="ID Number" onChange={this.onChange}/> </Col>
 
 											<Col md="12" className="my-2"><Input type="text" name="kra" id="kra" placeholder="KRA PIN" onChange={this.onChange}/> </Col>
 
@@ -309,17 +341,10 @@ handleSubmit = (event) => {
 
 											<Col md="12" className="my-2"><Input type="text" name="payroll" id="payroll" placeholder="Payroll Number" onChange={this.onChange}/> </Col>
 
-									      
-
-									        
-
 
 									        </Row>
 
 								      </FormGroup>
-								      		
-								      		
-								      		<Button type="submit">Submit</Button>
 
 								      
 								    </Form>
@@ -340,8 +365,6 @@ handleSubmit = (event) => {
 								<Card body>
 								<CardTitle>Earnings</CardTitle>
 
-
-
 									<Form onSubmit={this.handleSubmit}>
 
 
@@ -349,15 +372,10 @@ handleSubmit = (event) => {
 
 								      		
 								      		<Button value="add more" onClick={this.addClick_e.bind(this)}>Add</Button> 
-
-								      		<Button className="mx-4" type="submit">Submit</Button>
-
 								      
 								    </Form>
 
 									</Card>
-
-								
 
 						        </Col>
 						        
@@ -375,17 +393,11 @@ handleSubmit = (event) => {
 
 									<Form onSubmit={this.handleSubmit}>
 
-										
-
-
-
-
 								      {this.createDeductionsUI()} 
 
+											<Button value="add more" onClick={this.addClick_d.bind(this)}>Add</Button>																				  
+													  
 								      		
-								      		<Button value="add more" onClick={this.addClick_d.bind(this)}>Add</Button> 
-
-								      		<Button className="mx-4" type="submit">Submit</Button>
 
 								      
 								    </Form>
@@ -410,26 +422,36 @@ handleSubmit = (event) => {
 
 									<Form onSubmit={this.handleSubmit}>
 
-									 {/* <FormGroup>
-									  <Row>
-
-
-									        <Col md="5"><Input type="paycode" name="paycode" id="paycode" placeholder="Item" onChange={this.onChange}/> </Col>
-
-									        <Col md="5"><Input type="amount" name="amount" id="amount" placeholder="Amount" onChange={this.onChange}/> </Col>
-
-									        <Col md="2"><Button>Remove</Button> </Col>
-
-									        </Row>
-
-									 </FormGroup>*/}
-
+									
 								      {this.createTaxUI()} 
 
 								      		
 								      		<Button value="add more" onClick={this.addClick_t.bind(this)}>Add</Button> 
 
-								      		<Button className="mx-4" type="submit">Submit</Button>
+								    </Form>
+
+									</Card>
+
+								
+
+						        </Col>
+						        
+						    </Row>
+					    </Container>
+						<Container className="my-4">
+							
+							<Row>
+						        <Col md={{ size: 8, offset: 2 }}>
+
+								<Card body>
+
+
+
+									<Form onSubmit={this.handleSubmit}>
+
+
+								      
+								      		<center><Button color="primary" className="mx-4" type="submit">Submit</Button></center>
 
 								      
 								    </Form>
@@ -442,6 +464,7 @@ handleSubmit = (event) => {
 						        
 						    </Row>
 					    </Container>
+
 
 						</div>
 				

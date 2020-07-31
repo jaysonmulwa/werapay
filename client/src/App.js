@@ -6,6 +6,7 @@ import {
   Link,
   withRouter,
 } from "react-router-dom";
+import { Spinner } from 'reactstrap';
 
 import { createBrowserHistory } from "history";
 
@@ -24,7 +25,7 @@ const HomeComponentLazy = lazy(() =>
 
 const HomePageTemplate = (props) => (
   <div>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="centered"><Spinner style={{ width: '3rem', height: '3rem' }} color="primary"/></div>}>
       <HomeComponentLazy />
     </Suspense>
   </div>

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/gofiber/fiber"	
+	"github.com/gofiber/cors"
 	"github.com/jinzhu/gorm"
 	
 )
@@ -44,7 +45,7 @@ type LineItems struct {
 
 func setupRoutes(app *fiber.App){
 
-	app.Get("/api/v1/personalslip", personalSlip)
+	app.Post("/api/v1/personalslip", personalSlip)
 
 }
 
@@ -55,6 +56,9 @@ func main() {
 	//server
 
 	app := fiber.New()
+
+	//Handle Cors
+	app.Use(cors.New())
 
 	setupRoutes(app)
 
