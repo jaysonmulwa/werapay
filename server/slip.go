@@ -24,6 +24,18 @@ var (
 	DBConn *gorm.DB
 
 )
+type Company struct {
+	cname string `json:"cname"`
+	caddr string `json:"caddr"`
+}
+type Personal struct {
+	fname string `json:"fname"`
+	idno string `json:"idno"`
+	kra string `json:"kra"`
+	position string `json:"position"`
+	dpt string `json:"dpt"`
+	payroll string `json:"payroll"`
+}
 
 
 type LineItemsType struct {
