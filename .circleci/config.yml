@@ -23,4 +23,5 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
-      - run: go test ./slip_test.go
+      - run: go test -v TestCalculate
+      #- run: go test -v ./werapay/server/slip_test.go
