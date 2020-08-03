@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/gofiber/fiber"	
 	"github.com/gofiber/cors"
@@ -24,17 +25,34 @@ var (
 	DBConn *gorm.DB
 
 )
-type Company struct {
-	cname string `json:"cname"`
-	caddr string `json:"caddr"`
+
+
+type NewSlip struct {
+
+	Cname string `json:"cname"`
+	Caddr string `json:"caddr"`
+	
+	Name string `json:"fname"`
+	ID string `json:"idno"`
+	KRA string `json:"kra"`
+	Position string `json:"position"` 
+	Department string `json:"dpt"`
+	Payroll string `json:"payroll"`
+	Paycode_e []string `json:"paycode_e"`
+	Paycode_d []string `json:"paycode_d"`
+	Paycode_t []string `json:"paycode_t"`
+	
+	Amount_e []string `json:"amount_e"`
+	Amount_d []string `json:"amount_d"`
+	Amount_t []string `json:"amount_t"`
+
 }
-type Personal struct {
-	fname string `json:"fname"`
-	idno string `json:"idno"`
-	kra string `json:"kra"`
-	position string `json:"position"`
-	dpt string `json:"dpt"`
-	payroll string `json:"payroll"`
+
+
+type Response struct {
+	
+	NewSlip NewSlip `json:"newSlip"`
+
 }
 
 
@@ -59,6 +77,8 @@ func setupRoutes(app *fiber.App){
 
 	app.Post("/api/v1/personalslip", personalSlip)
 
+	
+
 }
 
 
@@ -72,6 +92,9 @@ func main() {
 	//Handle Cors
 	app.Use(cors.New())
 
+	//app.Use(middleware.Helmet())
+
+
 	setupRoutes(app)
 
 	app.Listen(8000)
@@ -80,6 +103,20 @@ func main() {
 }
 
 func personalSlip(c *fiber.Ctx){
+
+	
+	p := new(Response)
+
+	// Bind data to p or log error
+	if err := c.BodyParser(p); err != nil {
+			log.Println(err)
+			c.Status(500).Send("Failed")
+			return
+	}
+
+
+	log.Println(p)
+	fmt.Println(p.NewSlip)
 
 
 	
