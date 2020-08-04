@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"github.com/jung-kurt/gofpdf"
-	"github.com/gofiber/fiber"	
 	"github.com/gofiber/cors"
+	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
-	
+	"github.com/jung-kurt/gofpdf"
+	"log"
 )
 
 const (
@@ -21,40 +20,36 @@ const (
 )
 
 var (
-
 	DBConn *gorm.DB
-
 )
 
-
 type NewSlip struct {
-
 	Cname string `json:"cname"`
 	Caddr string `json:"caddr"`
-	
-	Name string `json:"fname"`
-	ID string `json:"idno"`
-	KRA string `json:"kra"`
-	Position string `json:"position"` 
-	Department string `json:"dpt"`
-	Payroll string `json:"payroll"`
-	Paycode_e []string `json:"paycode_e"`
-	Paycode_d []string `json:"paycode_d"`
-	Paycode_t []string `json:"paycode_t"`
-	
+
+	Name       string   `json:"fname"`
+	ID         string   `json:"idno"`
+	KRA        string   `json:"kra"`
+	Position   string   `json:"position"`
+	Department string   `json:"dpt"`
+	Payroll    string   `json:"payroll"`
+	Paycode_e  []string `json:"paycode_e"`
+	Paycode_d  []string `json:"paycode_d"`
+	Paycode_t  []string `json:"paycode_t"`
+
+	Bank  string `json:"bank"`
+	Acc   string `json:"acc"`
+	Month string `json:"month"`
+	Year  string `json:"year"`
+
 	Amount_e []string `json:"amount_e"`
 	Amount_d []string `json:"amount_d"`
 	Amount_t []string `json:"amount_t"`
-
 }
-
 
 type Response struct {
-	
 	NewSlip NewSlip `json:"newSlip"`
-
 }
-
 
 type LineItemsType struct {
 	TypeName string
@@ -71,17 +66,11 @@ type LineItems struct {
 	amount float64
 }
 
-
-
-func setupRoutes(app *fiber.App){
+func setupRoutes(app *fiber.App) {
 
 	app.Post("/api/v1/personalslip", personalSlip)
 
-	
-
 }
-
-
 
 func main() {
 
@@ -94,32 +83,28 @@ func main() {
 
 	//app.Use(middleware.Helmet())
 
-
 	setupRoutes(app)
 
 	app.Listen(8000)
 
-
 }
 
-func personalSlip(c *fiber.Ctx){
+func personalSlip(c *fiber.Ctx) {
 
-	
 	p := new(Response)
+
+	log.Println(c.Is("mulitpart/form-data"))
 
 	// Bind data to p or log error
 	if err := c.BodyParser(p); err != nil {
-			log.Println(err)
-			c.Status(500).Send("Failed")
-			return
+		log.Println(err)
+		c.Status(500).Send("Failed")
+		return
 	}
-
 
 	log.Println(p)
 	fmt.Println(p.NewSlip)
-
-
-	
+	fmt.Println(p.NewSlip.Name)
 
 	earnings := []LineItemsType{
 
@@ -205,8 +190,6 @@ func personalSlip(c *fiber.Ctx){
 
 	fmt.Println(deductions)
 
-	
-
 	pdf := gofpdf.New("P", "mm", "A4", "")
 
 	w, _ := pdf.GetPageSize()
@@ -216,11 +199,13 @@ func personalSlip(c *fiber.Ctx){
 
 	// Top Banner
 	pdf.SetFillColor(0, 191, 255)
+
 	pdf.Polygon([]gofpdf.PointType{
-		{0, 0},
-		{w, 0},
-		{w, bannerHt},
+
 		{0, bannerHt},
+		{w, bannerHt},
+		{w, 2.125 * bannerHt},
+		{0, 2.125 * bannerHt},
 	}, "F")
 
 	// Banner - Logo
@@ -229,29 +214,29 @@ func personalSlip(c *fiber.Ctx){
 
 	// Banner - Address
 	pdf.SetFont("arial", "", 12)
-	pdf.SetTextColor(255, 255, 255)
+	pdf.SetTextColor(0, 0, 0)
 	_, lineHt = pdf.GetFontSize()
 	pdf.MoveTo(w-xIndent-124.0, (bannerHt-(lineHt*1.5*3.0))/2.0)
-	pdf.MultiCell(124.0, lineHt*1.5, "P.O. Box 62345 - 00200 Nairobi, Harambee Ave, Nairobi\nNairobi, Kenya\n12345", gofpdf.BorderNone, gofpdf.AlignRight, false)
+	pdf.MultiCell(124.0, lineHt*1.5, p.NewSlip.Cname+"\n"+p.NewSlip.Caddr, gofpdf.BorderNone, gofpdf.AlignRight, false)
 
 	//Header - Payslip (month)
 
 	pdf.SetFont("arial", "", 16)
-	pdf.SetTextColor(180, 180, 180)
+	pdf.SetTextColor(255, 255, 255)
 
 	_, lineHt = pdf.GetFontSize()
 
-	pdf.Text(w/3, bannerHt+lineHt*1.0, "PAYSLIP FOR JANUARY 2020")
+	pdf.Text(w/3, bannerHt+lineHt*1.0, "PAYSLIP FOR "+p.NewSlip.Month+" "+p.NewSlip.Year)
 
 	//Content
-	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", "Jayson Mulwa")
-	summaryBlock(pdf, xIndent, bannerHt+lineHt*5.25, "ID No.", "00000000")
+	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", p.NewSlip.Name)
+	summaryBlock(pdf, xIndent, bannerHt+lineHt*5.25, "ID No.", p.NewSlip.ID)
 
-	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", "Software Engineer")
-	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*5.25, "KRA PIN", "0WA018AY9")
+	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", p.NewSlip.Position)
+	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*5.25, "KRA PIN", p.NewSlip.KRA)
 
-	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*2.0, "Department", "IT")
-	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*5.25, "Payroll No.", "29A2018")
+	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*2.0, "Department", p.NewSlip.Department)
+	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*5.25, "Payroll No.", p.NewSlip.Payroll)
 
 	//payCodesTitle()
 
@@ -307,14 +292,13 @@ func personalSlip(c *fiber.Ctx){
 
 	}
 
-
 	c.Send("Works")
 
 }
 
 func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) (float64, float64) {
 	pdf.SetFont("times", "", 14)
-	pdf.SetTextColor(180, 180, 180)
+	pdf.SetTextColor(255, 255, 255)
 	_, lineHt := pdf.GetFontSize()
 	y = y + lineHt
 	pdf.Text(x, y, title)

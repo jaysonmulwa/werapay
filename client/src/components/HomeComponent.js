@@ -1,6 +1,6 @@
 import React, { Component, lazy, Suspense} from "react";
 import axios from "axios";
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Fade, Card, CardTitle } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Fade, Card, CardTitle, CustomInput, CardImg, CardText, CardImgOverlay } from 'reactstrap';
 
 
 
@@ -35,6 +35,19 @@ class HomeComponent extends Component {
 
 		caddr: '',
 
+		month: '',
+
+		year: '',
+
+		bank: '',
+
+		acc: '',
+
+		file: [],
+		filename: null,
+		tempfile: null,
+
+
 
 		values: [],
 
@@ -60,6 +73,32 @@ class HomeComponent extends Component {
 
 		values_t: [],
 
+	};
+
+	FileOnChange = (e) => {
+		if (typeof e.target.files[0] != "undefined") {
+			const initState = this.state.filename;
+			const initFileState = this.state.isNew;
+
+			//if first time- if is false
+			if (initState == null) {
+				this.setState({
+					isNew: false,
+				});
+			}
+
+			this.setState({ file: e.target.files[0] });
+			this.setState({ filename: e.target.files[0].name });
+			this.setState({ tempfile: URL.createObjectURL(e.target.files[0]) });
+
+			//Toggle only for first time
+			/*if (initFileState == true) {
+				const imagepreview = document.querySelector(".imagepreview");
+				imagepreview.classList.toggle("hidden");
+			}*/
+		}
+
+		console.log(this.state);
 	};
 
 onChange = e =>{
@@ -149,7 +188,7 @@ handleSubmit = (event) => {
 	alert('A name was submitted: ' + this.state.paycode_t.join(', ') + ' ... ' + this.state.amount_t.join(', ') );*/
 	event.preventDefault();
 	
-	const { cname, caddr, fname, idno, kra, position, dpt, payroll, paycode_e, amount_e, paycode_d, amount_d, paycode_t, amount_t,} = this.state;
+	const { cname, caddr, fname, idno, kra, position, dpt, payroll, bank, acc, month, year, file, filename, paycode_e, amount_e, paycode_d, amount_d, paycode_t, amount_t,} = this.state;
 
 	//Create user object
 	const newSlip = {
@@ -161,6 +200,12 @@ handleSubmit = (event) => {
 		position,
 		dpt,
 		payroll,
+		bank,
+		acc,
+		month,
+		year,
+		file,
+		filename,
 		paycode_e,
 		amount_e,
 		paycode_d,
@@ -170,6 +215,7 @@ handleSubmit = (event) => {
 	};
 
 		console.log(newSlip);
+		//	"Content-Type": "application/json"
 
 		if(newSlip){
 
@@ -179,9 +225,7 @@ handleSubmit = (event) => {
 					  newSlip
 					},
 					{
-					  headers: {
-						"Content-Type": "application/json"
-					  }
+					 
 					}
 				  )
 				  .then(res => {
@@ -280,8 +324,10 @@ handleSubmit = (event) => {
 							<Row>
 						        <Col md={{ size: 8, offset: 2 }}>
 
-								<Card body>
 								<CardTitle id="Company">Company Details</CardTitle>
+
+								<Card body>
+								
 
 
 
@@ -293,9 +339,59 @@ handleSubmit = (event) => {
 									        <Row>
 
 
-									        <Col md="12" className="my-2"><Input type="text" name="cname" id="cname" placeholder="Company Name" onChange={this.onChange}/> </Col>
+									        <Col md="12" className="my-2"><Label for="companyName">Company Name</Label><Input type="text" name="cname" id="cname" placeholder="Company Name" onChange={this.onChange}/> </Col>
 
-									        <Col md="12" className="my-2"><Input type="text" name="caddr" id="caddr" placeholder="Company Address" onChange={this.onChange}/> </Col>
+									        <Col md="12" className="my-2"><Label for="CompanyAddress">Company Address</Label><Input type="text" name="caddr" id="caddr" placeholder="Company Address" onChange={this.onChange}/> </Col>
+											<Col md="6" className="my-2">
+
+											<Label for="Logo">Company Logo</Label>
+
+											<CustomInput
+												type="file"
+												name="customFile"
+												id="customFile"
+												label={'choose an image file'}
+												onChange={this.FileOnChange}/>
+												
+										
+												{/*<input
+													className="bg-gray-600 hidden"
+													type="file"
+													name="customFile"
+													id="customFile"
+													onChange={this.FileOnChange}
+												/>*/}
+												
+												
+											 </Col>
+
+											 <Col md="6" className="my-2">
+
+											 <div>
+												<img
+													style={{ maxHeight: "8rem" }}
+													className="imagepreview hidden mx-auto mb-3 rounded-md shadow-md focus:outline-none focus:shadow-outline w-1/2"
+													src={this.state.tempfile}
+												/>
+											</div>
+
+											{/*<div>
+											<Card inverse>
+												<CardImg width="100%" src={this.state.tempfile} alt="Card image cap" />
+												<CardImgOverlay>
+												<CardTitle>Card Title</CardTitle>
+												<CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+												<CardText>
+													<small className="text-muted">Last updated 3 mins ago</small>
+												</CardText>
+												</CardImgOverlay>
+											</Card>
+											</div>*/}
+												</Col>
+
+											 
+
+										
 
 									        </Row>
 
@@ -317,8 +413,9 @@ handleSubmit = (event) => {
 							<Row>
 						        <Col md={{ size: 8, offset: 2 }}>
 
-								<Card body>
 								<CardTitle>Personal Details</CardTitle>
+								<Card body>
+								
 
 
 
@@ -329,17 +426,44 @@ handleSubmit = (event) => {
 									        <Row>
 
 
-									        <Col md="12" className="my-2"><Input type="text" name="fname" id="fname" placeholder="Full Name" onChange={this.onChange}/> </Col>
+									        <Col md="12" className="my-2"><Label for="Full Name">Full Name</Label><Input type="text" name="fname" id="fname" placeholder="Full Name" onChange={this.onChange}/> </Col>
 
-									        <Col md="12" className="my-2"><Input type="number" name="idno" id="ino" placeholder="ID Number" onChange={this.onChange}/> </Col>
+									        <Col md="12" className="my-2"><Label for="ID Number">ID Number</Label><Input type="number" name="idno" id="ino" placeholder="ID Number" onChange={this.onChange}/> </Col>
 
-											<Col md="12" className="my-2"><Input type="text" name="kra" id="kra" placeholder="KRA PIN" onChange={this.onChange}/> </Col>
+											<Col md="12" className="my-2"><Label for="KRA PIN">KRA PIN</Label><Input type="text" name="kra" id="kra" placeholder="KRA PIN" onChange={this.onChange}/> </Col>
 
-									        <Col md="12" className="my-2"><Input type="text" name="position" id="position" placeholder="Position" onChange={this.onChange}/> </Col>
+									        <Col md="12" className="my-2"><Label for="Position">Position</Label><Input type="text" name="position" id="position" placeholder="Position" onChange={this.onChange}/> </Col>
 
-											<Col md="12" className="my-2"><Input type="text" name="dpt" id="dpt" placeholder="Department" onChange={this.onChange}/> </Col>
+											<Col md="12" className="my-2"><Label for="Department">Department</Label><Input type="text" name="dpt" id="dpt" placeholder="Department" onChange={this.onChange}/> </Col>
 
-											<Col md="12" className="my-2"><Input type="text" name="payroll" id="payroll" placeholder="Payroll Number" onChange={this.onChange}/> </Col>
+											<Col md="12" className="my-2"><Label for="Payroll Number">Payroll Number</Label><Input type="text" name="payroll" id="payroll" placeholder="Payroll Number" onChange={this.onChange}/> </Col>
+
+											<Col md="6" className="my-2"><Label for="Bank">Bank</Label><Input type="text" name="bank" id="bank" placeholder="Bank" onChange={this.onChange}/> </Col>
+
+											<Col md="6" className="my-2"><Label for="Account Number">Account Number</Label><Input type="text" name="acc" id="acc" placeholder="Account Number" onChange={this.onChange}/> </Col>
+
+											<Col md="6" className="my-2"><Label for="Month">Month</Label>
+											
+											<Input type="select" name="month" id="month" placeholder="Month" onChange={this.onChange}>
+												<option value="JANUARY">January</option>
+												<option value="FEBRUARY">February</option>
+												<option value="MARCH">March</option>
+												<option value="APRIL">April</option>
+												<option value="MAY">May</option>
+												<option value="JUNE">June</option>
+												<option value="JULY">July</option>
+												<option value="AUGUST">August</option>
+												<option value="SEPTEMBER">September</option>
+												<option value="OCTOBER">October</option>
+												<option value="NOVEMBER">November</option>
+												<option value="DECEMBER">December</option>
+
+											</Input>
+											</Col>
+
+											<Col md="6" className="my-2"><Label for="Year">Year</Label><Input type="number" name="year" id="year" placeholder="Year" onChange={this.onChange}/> </Col>
+											
+											
 
 
 									        </Row>
@@ -362,8 +486,9 @@ handleSubmit = (event) => {
 							<Row>
 						        <Col md={{ size: 8, offset: 2 }}>
 
-								<Card body>
 								<CardTitle>Earnings</CardTitle>
+								<Card body>
+								
 
 									<Form onSubmit={this.handleSubmit}>
 
@@ -386,8 +511,9 @@ handleSubmit = (event) => {
 							<Row>
 						        <Col md={{ size: 8, offset: 2 }}>
 
-								<Card body>
 								<CardTitle>Deductions</CardTitle>
+								<Card body>
+								
 
 
 
@@ -415,8 +541,9 @@ handleSubmit = (event) => {
 							<Row>
 						        <Col md={{ size: 8, offset: 2 }}>
 
-								<Card body>
 								<CardTitle>Tax Details</CardTitle>
+								<Card body>
+								
 
 
 
