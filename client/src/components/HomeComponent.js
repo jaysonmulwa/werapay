@@ -191,7 +191,7 @@ handleSubmit = (event) => {
 	const { cname, caddr, fname, idno, kra, position, dpt, payroll, bank, acc, month, year, file, filename, paycode_e, amount_e, paycode_d, amount_d, paycode_t, amount_t,} = this.state;
 
 	//Create user object
-	const newSlip = {
+	/*const newSlip = {
 		cname,
 		caddr,
 		fname,
@@ -212,23 +212,46 @@ handleSubmit = (event) => {
 		amount_d,
 		paycode_t,
 		amount_t,
-	};
+	};*/
+
+		const newSlip = new FormData();
+
+		newSlip.append("cname", cname);
+		newSlip.append("caddr", caddr);
+		newSlip.append("fname", fname);
+		newSlip.append("idno", idno);
+		newSlip.append("kra", kra);
+		newSlip.append("position", position);
+		newSlip.append("dpt", dpt);
+		newSlip.append("payroll", payroll);
+		newSlip.append("bank", bank);
+		newSlip.append("month", month);
+		newSlip.append("year", year);
+		newSlip.append("position", position);
+		newSlip.append("file", file);
+		newSlip.append("filename", filename);
+		newSlip.append("paycode_e", paycode_e);
+		newSlip.append("amount_e", amount_e);
+		newSlip.append("paycode_d", paycode_d);
+		newSlip.append("amount_d", amount_d);
+		newSlip.append("paycode_t", paycode_t);
+		newSlip.append("amount_t", amount_t);
 
 		console.log(newSlip);
-		//	"Content-Type": "application/json"
+
+
+		const link = endpoint + "/api/v1/personalslip";
+
+		const config = {
+
+			headers: { "Content-Type": "multipart/form-data; boundary=--------------------------811161660471543283806813" },
+
+		};
 
 		if(newSlip){
 
-			axios.post(
-					endpoint + "/api/v1/personalslip",
-					{
-					  newSlip
-					},
-					{
-					 
-					}
-				  )
-				  .then(res => {
+			axios.post(link, newSlip, config)
+			.then(res => {
 					console.log(res);
 				  });
 			  

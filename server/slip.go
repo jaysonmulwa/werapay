@@ -33,6 +33,7 @@ type NewSlip struct {
 	Position   string   `json:"position"`
 	Department string   `json:"dpt"`
 	Payroll    string   `json:"payroll"`
+
 	Paycode_e  []string `json:"paycode_e"`
 	Paycode_d  []string `json:"paycode_d"`
 	Paycode_t  []string `json:"paycode_t"`
@@ -45,10 +46,13 @@ type NewSlip struct {
 	Amount_e []string `json:"amount_e"`
 	Amount_d []string `json:"amount_d"`
 	Amount_t []string `json:"amount_t"`
+
+	
 }
 
 type Response struct {
 	NewSlip NewSlip `json:"newSlip"`
+
 }
 
 type LineItemsType struct {
@@ -91,9 +95,12 @@ func main() {
 
 func personalSlip(c *fiber.Ctx) {
 
-	p := new(Response)
 
-	log.Println(c.Is("mulitpart/form-data"))
+	
+
+	
+
+	p := new(Response)
 
 	// Bind data to p or log error
 	if err := c.BodyParser(p); err != nil {
@@ -102,93 +109,26 @@ func personalSlip(c *fiber.Ctx) {
 		return
 	}
 
-	log.Println(p)
-	fmt.Println(p.NewSlip)
-	fmt.Println(p.NewSlip.Name)
+	//Display File on Slip
 
-	earnings := []LineItemsType{
+	
+	file, erra := c.FormFile("file")
 
-		LineItemsType{
+	// Check for errors:
+	if erra == nil {
+		// Save file to root directory:
+		c.SaveFile(file, fmt.Sprintf("./images/%s", file.Filename))
 
-			TypeName: "Earnings",
+	}else{
 
-			Totals: 0.0,
+		log.Println(erra)
 
-			HasTotal: true,
-
-			items: []LineItems{
-
-				LineItems{
-
-					name: "Basic Pay",
-
-					amount: 100.0,
-				},
-
-				LineItems{
-
-					name: "Commuter Allowance",
-
-					amount: 100.0,
-				},
-			},
-		},
-		LineItemsType{
-
-			TypeName: "Earnings",
-
-			Totals: 0.0,
-
-			HasTotal: true,
-
-			items: []LineItems{
-
-				LineItems{
-
-					name: "Basic Pay",
-
-					amount: 100.0,
-				},
-
-				LineItems{
-
-					name: "Commuter Allowance",
-
-					amount: 100.0,
-				},
-			},
-		},
 	}
 
-	deductions := LineItemsType{
 
-		TypeName: "Deductions",
 
-		Totals: 0.0,
+	log.Println(p.NewSlip.Caddr)
 
-		HasTotal: true,
-
-		items: []LineItems{
-
-			LineItems{
-
-				name: "NHIF",
-
-				amount: 100.0,
-			},
-
-			LineItems{
-
-				name: "NSSF",
-
-				amount: 100.0,
-			},
-		},
-	}
-
-	fmt.Println(earnings)
-
-	fmt.Println(deductions)
 
 	pdf := gofpdf.New("P", "mm", "A4", "")
 
@@ -210,7 +150,7 @@ func personalSlip(c *fiber.Ctx) {
 
 	// Banner - Logo
 	_, lineHt := pdf.GetFontSize()
-	pdf.Image("images/logo1.png", xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
+	pdf.Image("images/" + file.Filename, xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
 
 	// Banner - Address
 	pdf.SetFont("arial", "", 12)
