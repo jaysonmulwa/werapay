@@ -225,6 +225,7 @@ handleSubmit = (event) => {
 		newSlip.append("dpt", dpt);
 		newSlip.append("payroll", payroll);
 		newSlip.append("bank", bank);
+		newSlip.append("acc", acc);
 		newSlip.append("month", month);
 		newSlip.append("year", year);
 		newSlip.append("position", position);

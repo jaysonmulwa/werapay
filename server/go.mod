@@ -9,4 +9,5 @@ require (
 	github.com/jung-kurt/gofpdf v1.16.2
 	github.com/klauspost/compress v1.10.10 // indirect
 	golang.org/x/sys v0.0.0-20200728102440-3e129f6d46b1 // indirect
+	golang.org/x/text v0.3.0
 )
