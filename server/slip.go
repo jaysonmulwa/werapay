@@ -12,6 +12,7 @@ import (
 	"reflect"
 	"strings"
 	"strconv"
+	"os"
 )
 
 const (
@@ -70,7 +71,11 @@ type Response struct {
 
 }
 
+func serveStatic(app *fiber.App) {
 
+	app.Static("/", "./build")
+
+}
 
 func setupRoutes(app *fiber.App) {
 
@@ -81,17 +86,26 @@ func setupRoutes(app *fiber.App) {
 func main() {
 
 	//server
-
 	app := fiber.New()
 
 	//Handle Cors
 	app.Use(cors.New())
 
-	//app.Use(middleware.Helmet())
+	serveStatic(app)
 
 	setupRoutes(app)
 
-	app.Listen(8000)
+	port := os.Getenv("PORT")
+
+	if port == "" {
+
+		port = "5000"
+		
+	}
+
+	log.Printf("Listening on port %s\n\n", port)
+
+	app.Listen(port)
 
 }
 

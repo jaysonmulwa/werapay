@@ -13,7 +13,7 @@ const JumboComponentLazy = lazy(() =>
 );
 
 
-let endpoint = "http://localhost:8000";
+let endpoint = "http://localhost:8080";
 
 class HomeComponent extends Component {
 
@@ -182,37 +182,12 @@ handleTaxAmountChange(i, event) {
 
 handleSubmit = (event) => {
 
-	/*alert(this.state.fname + this.state.cname + this.state.caddr);
-	alert('A name was submitted: ' + this.state.paycode_e.join(', ') + ' ... ' + this.state.amount_e.join(', ') );
-	alert('A name was submitted: ' + this.state.paycode_d.join(', ') + ' ... ' + this.state.amount_d.join(', ') );
-	alert('A name was submitted: ' + this.state.paycode_t.join(', ') + ' ... ' + this.state.amount_t.join(', ') );*/
+	
 	event.preventDefault();
 	
 	const { cname, caddr, fname, idno, kra, position, dpt, payroll, bank, acc, month, year, file, filename, paycode_e, amount_e, paycode_d, amount_d, paycode_t, amount_t,} = this.state;
 
-	//Create user object
-	/*const newSlip = {
-		cname,
-		caddr,
-		fname,
-		idno,
-		kra,
-		position,
-		dpt,
-		payroll,
-		bank,
-		acc,
-		month,
-		year,
-		file,
-		filename,
-		paycode_e,
-		amount_e,
-		paycode_d,
-		amount_d,
-		paycode_t,
-		amount_t,
-	};*/
+	
 
 		const newSlip = new FormData();
 
