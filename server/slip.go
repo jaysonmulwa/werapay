@@ -7,13 +7,16 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/jung-kurt/gofpdf"
 	"golang.org/x/text/language"
-    "golang.org/x/text/message"
+	"golang.org/x/text/message"
 	"log"
-	"reflect"
-	"strings"
-	"strconv"
 	"os"
+	"strconv"
+	"strings"
 )
+
+// "github.com/gofiber/adaptor"
+
+var file = "payslip.pdf"
 
 const (
 	month = "JANUARY"
@@ -23,13 +26,11 @@ const (
 const (
 	bannerHt = 42.0
 	xIndent  = 20.0
-	
 )
 
 var (
-	
 	DBConn *gorm.DB
-	next = 0.0
+	next   = 0.0
 
 	gross_pay = 0.0
 
@@ -42,16 +43,16 @@ type NewSlip struct {
 	Cname string `json:"cname"`
 	Caddr string `json:"caddr"`
 
-	Name       string   `json:"fname"`
-	ID         string   `json:"idno"`
-	KRA        string   `json:"kra"`
-	Position   string   `json:"position"`
-	Department string   `json:"dpt"`
-	Payroll    string   `json:"payroll"`
+	Name       string `json:"fname"`
+	ID         string `json:"idno"`
+	KRA        string `json:"kra"`
+	Position   string `json:"position"`
+	Department string `json:"dpt"`
+	Payroll    string `json:"payroll"`
 
-	Paycode_e  []string `json:"paycode_e"`
-	Paycode_d  []string `json:"paycode_d"`
-	Paycode_t  []string `json:"paycode_t"`
+	Paycode_e []string `json:"paycode_e"`
+	Paycode_d []string `json:"paycode_d"`
+	Paycode_t []string `json:"paycode_t"`
 
 	Bank  string `json:"bank"`
 	Acc   string `json:"acc"`
@@ -61,25 +62,26 @@ type NewSlip struct {
 	Amount_e []string `json:"amount_e"`
 	Amount_d []string `json:"amount_d"`
 	Amount_t []string `json:"amount_t"`
-
-	
 }
 
 type Response struct {
-
 	NewSlip NewSlip `json:"newSlip"`
-
 }
 
 func serveStatic(app *fiber.App) {
 
 	app.Static("/", "./build")
 
+	app.Static("/slips", "./slips")
+
 }
 
 func setupRoutes(app *fiber.App) {
 
 	app.Post("/api/v1/personalslip", personalSlip)
+
+	// http.HandlerFunc -> func(*fiber.Ctx)
+	//app.Get("/testing", adaptor.HTTPHandlerFunc(greet))
 
 }
 
@@ -94,6 +96,7 @@ func main() {
 	serveStatic(app)
 
 	setupRoutes(app)
+
 
 	port := os.Getenv("PORT")
 
@@ -112,7 +115,12 @@ func main() {
 func personalSlip(c *fiber.Ctx) {
 
 	p := new(NewSlip)
-
+	var P_E []string
+	var A_E []string
+	var P_D []string
+	var A_D []string
+	var P_T []string
+	var A_T []string
 	// Bind data to p or log error
 	if err := c.BodyParser(p); err != nil {
 		log.Println(err)
@@ -122,7 +130,6 @@ func personalSlip(c *fiber.Ctx) {
 
 	//Display File on Slip
 
-	
 	file, erra := c.FormFile("file")
 
 	// Check for errors:
@@ -130,7 +137,7 @@ func personalSlip(c *fiber.Ctx) {
 		// Save file to root directory:
 		c.SaveFile(file, fmt.Sprintf("./images/%s", file.Filename))
 
-	}else{
+	} else {
 
 		log.Println(erra)
 
@@ -140,32 +147,22 @@ func personalSlip(c *fiber.Ctx) {
 	ID := c.FormValue("idno")
 	Department := c.FormValue("idno")
 	Name := c.FormValue("fname")
-	
+
+
 	//Problematic array
-	P_E := strings.Split(c.FormValue("paycode_e"), ",")
+	P_E = strings.Split(c.FormValue("paycode_e"), ",")
 
-	A_E := strings.Split(c.FormValue("amount_e"), ",")
+	A_E = strings.Split(c.FormValue("amount_e"), ",")
 
-	P_D := strings.Split(c.FormValue("paycode_d"), ",")
+	P_D = strings.Split(c.FormValue("paycode_d"), ",")
 
-	A_D := strings.Split(c.FormValue("amount_d"), ",")
+	A_D = strings.Split(c.FormValue("amount_d"), ",")
 
-	P_T := strings.Split(c.FormValue("paycode_t"), ",")
+	P_T = strings.Split(c.FormValue("paycode_t"), ",")
 
-	A_T := strings.Split(c.FormValue("amount_t"), ",")
+	A_T = strings.Split(c.FormValue("amount_t"), ",")
 
 	
-
-
-	fmt.Println(reflect.TypeOf(c.FormValue("paycode_e")))
-
-
-
-	for x, y := range p.Paycode_e {
-
-		log.Println(x,y)
-
-	} 
 
 	pdf := gofpdf.New("P", "mm", "A4", "")
 
@@ -185,9 +182,15 @@ func personalSlip(c *fiber.Ctx) {
 		{0, 2.125 * bannerHt},
 	}, "F")
 
-	// Banner - Logo
 	_, lineHt := pdf.GetFontSize()
-	pdf.Image("images/" + file.Filename, xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
+
+	if erra == nil {
+
+		// Banner - Logo
+		pdf.Image("images/"+file.Filename, xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
+
+	}
+
 
 	// Banner - Address
 	pdf.SetFont("arial", "", 12)
@@ -219,15 +222,13 @@ func personalSlip(c *fiber.Ctx) {
 
 	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5-2*lineHt*0.75, "Earnings")
 
-	
-
 	for i, _ := range P_E {
 
 		payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+(2*float64(i))*lineHt*0.75, P_E[i], A_E[i])
 
-		next = (2 * float64(i)) + 2.0	
+		next = (2 * float64(i)) + 2.0
 
-		var x float64	
+		var x float64
 
 		x, err := strconv.ParseFloat(A_E[i], 64)
 
@@ -237,27 +238,22 @@ func personalSlip(c *fiber.Ctx) {
 
 		}
 
-
-	
 	}
 
-	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+ next *lineHt*0.75, "Gross Pay", fmt.Sprintf("%.2f", gross_pay))
+	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+next*lineHt*0.75, "Gross Pay", fmt.Sprintf("%.2f", gross_pay))
 
-	next = next + 2.0 
-	
+	next = next + 2.0
 
-	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5+ next * lineHt * 0.75, "Deductions")
-	next = next + 2.0 
-
+	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5+next*lineHt*0.75, "Deductions")
+	next = next + 2.0
 
 	for i, _ := range P_D {
 
-		payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+(next) * lineHt * 0.75, P_D[i], A_D[i])
+		payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+(next)*lineHt*0.75, P_D[i], A_D[i])
 
-		next = next + 2.0	
+		next = next + 2.0
 
 		var x float64
-		
 
 		x, err := strconv.ParseFloat(A_D[i], 64)
 
@@ -266,28 +262,26 @@ func personalSlip(c *fiber.Ctx) {
 			gross_deductions = gross_deductions + float64(x)
 
 		}
-		
-	
+
 	}
 
-	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+ next*lineHt*0.75, "Total Deductions", fmt.Sprintf("%.2f", gross_deductions))
-	next = next + 2.0 
+	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+next*lineHt*0.75, "Total Deductions", fmt.Sprintf("%.2f", gross_deductions))
+	next = next + 2.0
 
-	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5+ next * lineHt*0.75, "Tax Details")
-	next = next + 2.0 
+	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5+next*lineHt*0.75, "Tax Details")
+	next = next + 2.0
 
 	for i, _ := range P_T {
 
-		payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+((next))*lineHt*0.75, P_T[i], A_T[i])
+		payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+(next)*lineHt*0.75, P_T[i], A_T[i])
 
-		next = next + 2.0	
-	
+		next = next + 2.0
+
 	}
 
-	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+ next *lineHt*0.75, "Netpay", fmt.Sprintf("%.2f", gross_pay - gross_deductions))
+	payCodesTotals(pdf, xIndent*2.5, bannerHt+lineHt*10.5+next*lineHt*0.75, "Netpay", fmt.Sprintf("%.2f", gross_pay-gross_deductions))
 
-	next = next + 2.0 
-	
+	next = next + 2.0
 
 	//Footer Notes
 
@@ -295,21 +289,37 @@ func personalSlip(c *fiber.Ctx) {
 	pdf.SetTextColor(180, 180, 180)
 	pdf.Text(xIndent, 290, "Signature:")
 	//pdf.Line(43, 290, 105, 290)
-	pdf.Text(w/2+xIndent/2, 290, "Bank:  " + p.Bank + " " + p.Acc)
+	pdf.Text(w/2+xIndent/2, 290, "Bank:  "+p.Bank+" "+p.Acc)
 	//pdf.Line(136, 290, w-xIndent, 290)
 
 	//drawGrid(pdf)
 
-	err := pdf.OutputFileAndClose("payslip.pdf")
+	err := pdf.OutputFileAndClose("./slips/payslip.pdf")
+
+	//Clear Out Variables
+	gross_pay = 0.0
+
+	gross_deductions = 0.0
+
+	net_pay = 0.0
+	
 
 	if err != nil {
 
 		fmt.Println("error!")
 		panic(err)
 
+		c.Status(500).Send("Failed")
+
+	}else{
+
+		c.Send("Success")
+
 	}
 
-	c.Send("Works")
+	//c.Redirect("/testing")
+
+	
 
 }
 
@@ -389,10 +399,10 @@ func drawGrid(pdf *gofpdf.Fpdf) {
 	}
 }
 
-func number_format(c string) (string) {
+func number_format(c string) string {
 
 	d := message.NewPrinter(language.English)
-   
+
 	integer, err := d.Println(c)
 
 	if err == nil {
@@ -401,6 +411,5 @@ func number_format(c string) (string) {
 	}
 
 	return strconv.Itoa(integer)
-	
 
 }
