@@ -1,23 +1,11 @@
-import React, { Component, lazy, Suspense } from "react";
-import { Route, withRouter } from "react-router-dom";
+import React, { Component, lazy } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import {
-	Button,
-	Form,
 	FormGroup,
-	Label,
-	Input,
-	FormText,
-	Container,
-	Row,
-	Col,
 	Fade,
-	Card,
-	CardTitle,
 	CustomInput,
-	CardImg,
-	CardText,
-	CardImgOverlay,
+	
 } from "reactstrap";
 
 const NavComponentLazy = lazy(() => import("./NavComponent.js"));
@@ -26,7 +14,8 @@ const JumboComponentLazy = lazy(() => import("./JumboComponent.js"));
 
 const FooterComponentLazy = lazy(() => import("./FooterComponent.js"));
 
-//let endpoint = "http://localhost:5000";
+
+let endpoint = "http://localhost:5000";
 
 class HomeComponent extends Component {
 	state = {
@@ -79,6 +68,8 @@ class HomeComponent extends Component {
 		values_t: [],
 
 		downloaded: false,
+
+		slip_name: ""
 	};
 
 	componentDidMount() {
@@ -90,7 +81,7 @@ class HomeComponent extends Component {
 	FileOnChange = (e) => {
 		if (typeof e.target.files[0] != "undefined") {
 			const initState = this.state.filename;
-			const initFileState = this.state.isNew;
+			//const initFileState = this.state.isNew;
 
 			//if first time- if is false
 			if (initState == null) {
@@ -193,9 +184,9 @@ class HomeComponent extends Component {
 	handleDownload = (event) => {
 		event.preventDefault();
 
-		//const link = endpoint + "/slips/payslip.pdf";
+		const link = endpoint + "/slips/payslip.pdf";
 
-		const link = "/slips/payslip.pdf";
+		//const link = "/slips/payslip.pdf";
 
 		axios.get(link, "", "").then((res) => {
 			console.log(res);
@@ -260,8 +251,8 @@ class HomeComponent extends Component {
 			downloaded: false,
 		});
 
-		//const link = endpoint + "/api/v1/personalslip";
-		const link = "/api/v1/personalslip";
+		const link = endpoint + "/api/v1/personalslip";
+		//const link = "/api/v1/personalslip";
 
 		const config = {
 			headers: {
@@ -272,8 +263,14 @@ class HomeComponent extends Component {
 
 		if (newSlip) {
 			axios.post(link, newSlip, config).then((res) => {
-				if (res.data == "Success") {
-					const { downloaded } = this.state;
+				if (res.data !== "Failed") {
+
+					console.log(res.data);
+
+					this.setState({
+						slip_name: res.data,
+					});
+
 					this.setState({
 						downloaded: true,
 					});
@@ -441,6 +438,77 @@ class HomeComponent extends Component {
 			<div className="bg-gray-200">
 				<NavComponentLazy />
 				<JumboComponentLazy />
+
+				{/*Earnings*/}
+				<section class="text-gray-700 body-font">
+					<div class="container py-6 mx-auto flex">
+						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
+								Earnings
+							</h2>
+
+							{this.createEarningsUI()}
+
+							<div class="mb-2 mr-2">
+								<button
+									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
+									value="add more"
+									onClick={this.addClick_e.bind(this)}
+								>
+									Add
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				{/*Deductions*/}
+				<section class="text-gray-700 body-font">
+					<div class="container py-6 mx-auto flex">
+						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
+								Deductions
+							</h2>
+
+							{/*<form>*/}
+							{this.createDeductionsUI()}
+
+							<div class="mb-2 mr-2">
+								<button
+									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
+									value="add more"
+									onClick={this.addClick_d.bind(this)}
+								>
+									Add
+								</button>
+							</div>
+							{/*</form>*/}
+						</div>
+					</div>
+				</section>
+
+				{/*Tax*/}
+				<section class="text-gray-700 body-font">
+					<div class="container py-6 mx-auto flex">
+						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
+								Tax Details
+							</h2>
+
+							{this.createTaxUI()}
+
+							<div class="mb-2 mr-2">
+								<button
+									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
+									value="add more"
+									onClick={this.addClick_t.bind(this)}
+								>
+									Add
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
 
 				{/*Company Details*/}
 				<section class="text-gray-700 body-font">
@@ -708,77 +776,6 @@ class HomeComponent extends Component {
 					</div>
 				</section>
 
-				{/*Earnings*/}
-				<section class="text-gray-700 body-font">
-					<div class="container py-6 mx-auto flex">
-						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
-							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
-								Earnings
-							</h2>
-
-							{this.createEarningsUI()}
-
-							<div class="mb-2 mr-2">
-								<button
-									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
-									value="add more"
-									onClick={this.addClick_e.bind(this)}
-								>
-									Add
-								</button>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				{/*Deductions*/}
-				<section class="text-gray-700 body-font">
-					<div class="container py-6 mx-auto flex">
-						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
-							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
-								Deductions
-							</h2>
-
-							{/*<form>*/}
-							{this.createDeductionsUI()}
-
-							<div class="mb-2 mr-2">
-								<button
-									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
-									value="add more"
-									onClick={this.addClick_d.bind(this)}
-								>
-									Add
-								</button>
-							</div>
-							{/*</form>*/}
-						</div>
-					</div>
-				</section>
-
-				{/*Tax*/}
-				<section class="text-gray-700 body-font">
-					<div class="container py-6 mx-auto flex">
-						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
-							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
-								Tax Details
-							</h2>
-
-							{this.createTaxUI()}
-
-							<div class="mb-2 mr-2">
-								<button
-									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
-									value="add more"
-									onClick={this.addClick_t.bind(this)}
-								>
-									Add
-								</button>
-							</div>
-						</div>
-					</div>
-				</section>
-
 				{/*Submit*/}
 				<section class="text-gray-700 body-font">
 					<div class="container py-6 mx-auto flex">
@@ -815,12 +812,16 @@ class HomeComponent extends Component {
 								<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
 									<center>
 										<a
-											href="/slips/payslip.pdf"
+											
+											href = { `http://localhost:5000/slips/${this.state.slip_name}` }
+
 											target="_blank"
 											download
 										>
 											Download File
 										</a>
+										{/*href="http://localhost:5000/slips/payslip.pdf"*/}
+										{/*href="/slips/payslip.pdf"*/}
 									</center>
 								</div>
 							</div>

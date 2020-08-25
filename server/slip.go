@@ -12,6 +12,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+    "github.com/leekchan/accounting"
 )
 
 // "github.com/gofiber/adaptor"
@@ -19,17 +20,14 @@ import (
 var file = "payslip.pdf"
 
 const (
-	month = "JANUARY"
-	year  = "2020"
-)
-
-const (
 	bannerHt = 42.0
 	xIndent  = 20.0
 )
 
 var (
+
 	DBConn *gorm.DB
+
 	next   = 0.0
 
 	gross_pay = 0.0
@@ -37,6 +35,8 @@ var (
 	gross_deductions = 0.0
 
 	net_pay = 0.0
+
+	
 )
 
 type NewSlip struct {
@@ -71,8 +71,15 @@ type Response struct {
 func serveStatic(app *fiber.App) {
 
 	app.Static("/", "./build")
-
 	app.Static("/slips", "./slips")
+
+	/**/
+	app.Static("/app", "./build")
+	app.Static("/pricing", "./build")
+	app.Static("/batch", "./build")
+	app.Static("/help", "./build")
+
+	
 
 }
 
@@ -84,6 +91,7 @@ func setupRoutes(app *fiber.App) {
 	//app.Get("/testing", adaptor.HTTPHandlerFunc(greet))
 
 }
+
 
 func main() {
 
@@ -112,15 +120,21 @@ func main() {
 
 }
 
+
 func personalSlip(c *fiber.Ctx) {
 
 	p := new(NewSlip)
-	var P_E []string
-	var A_E []string
-	var P_D []string
-	var A_D []string
-	var P_T []string
-	var A_T []string
+	var (
+		P_E []string
+		A_E []string
+		P_D []string
+		A_D []string
+		P_T []string
+		A_T []string
+		slip_name string
+	)
+
+
 	// Bind data to p or log error
 	if err := c.BodyParser(p); err != nil {
 		log.Println(err)
@@ -129,7 +143,6 @@ func personalSlip(c *fiber.Ctx) {
 	}
 
 	//Display File on Slip
-
 	file, erra := c.FormFile("file")
 
 	// Check for errors:
@@ -294,7 +307,9 @@ func personalSlip(c *fiber.Ctx) {
 
 	//drawGrid(pdf)
 
-	err := pdf.OutputFileAndClose("./slips/payslip.pdf")
+	slip_name = "payslip_" + Name + "_" + p.Month + "_" + p.Year + ".pdf"
+
+	err := pdf.OutputFileAndClose("./slips/"+ slip_name)
 
 	//Clear Out Variables
 	gross_pay = 0.0
@@ -313,18 +328,15 @@ func personalSlip(c *fiber.Ctx) {
 
 	}else{
 
-		c.Send("Success")
+		c.Send(slip_name)
 
 	}
 
-	//c.Redirect("/testing")
-
-	
 
 }
 
 func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) (float64, float64) {
-	pdf.SetFont("times", "", 14)
+	pdf.SetFont("arial", "", 14)
 	pdf.SetTextColor(255, 255, 255)
 	_, lineHt := pdf.GetFontSize()
 	y = y + lineHt
@@ -347,7 +359,16 @@ func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
 	pdf.Text(x, y, paycode)
 
 	pdf.SetTextColor(50, 50, 50)
-	pdf.Text((w - xIndent*4), y, amount)
+	//pdf.Text((w - xIndent*4), y, amount)
+	f, _ := strconv.ParseFloat(amount, 64)
+
+	ac := accounting.Accounting{Symbol: "", Precision: 2}
+    amt := ac.FormatMoney(f)
+
+
+
+	pdf.SetXY((w - xIndent*4),y-3.5)
+	pdf.CellFormat(25, 1, amt, "0", 0, "TR", false, 0, "")
 
 }
 
@@ -355,7 +376,7 @@ func payCodesTitle(pdf *gofpdf.Fpdf, x, y float64, paycode string) {
 
 	//w, _:= pdf.GetPageSize()
 	pdf.SetFont("arial", "", 12)
-	pdf.SetTextColor(50, 50, 50)
+	pdf.SetTextColor(0, 191, 255)
 	_, lineHt := pdf.GetFontSize()
 	y = y + lineHt
 	pdf.Text(x-10, y, paycode)
@@ -365,14 +386,24 @@ func payCodesTitle(pdf *gofpdf.Fpdf, x, y float64, paycode string) {
 func payCodesTotals(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
 
 	w, _ := pdf.GetPageSize()
-	pdf.SetFont("arial", "", 12)
+	pdf.SetFont("arial", "B", 12)
 	pdf.SetTextColor(50, 50, 50)
 	_, lineHt := pdf.GetFontSize()
 	y = y + lineHt
 	pdf.Text(x-10, y, paycode)
+	
 
 	pdf.SetTextColor(50, 50, 50)
-	pdf.Text((w - xIndent*4), y, amount)
+	//pdf.Text((w - xIndent*4), y, amount)
+
+	f, _ := strconv.ParseFloat(amount, 64)
+
+	ac := accounting.Accounting{Symbol: "", Precision: 2}
+    amt := ac.FormatMoney(f)
+
+	pdf.SetXY((w - xIndent*4),y-3.5)
+	pdf.CellFormat(25, 1, amt, "0", 0, "TR", false, 0, "")
+	
 
 }
 

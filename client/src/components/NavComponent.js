@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarText,
-} from "reactstrap";
+import React from "react";
+import { useHistory } from "react-router";
+import { withRouter } from "react-router-dom";
+
 
 function NavComponent(props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
 
-  const toggle = () => setIsOpen(!isOpen);
+  const home = () => {
+    history.push("/home");
+  };
+  const pricing = () => {
+    history.push("/pricing");
+  };
+  const help = () => {
+    history.push("/help");
+  };
 
   return (
     <div>
@@ -30,31 +31,50 @@ function NavComponent(props) {
             <span class="ml-3 text-xl">WeraPay</span>
           </a>
           <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a href="/home" class="mr-5 hover:text-gray-900">
+            <button
+              class="rounded-lg py-2 px-4 text-black bg-transparent hover:text-grey-700 focus:outline-none"
+              type="button"
+              value="Home"
+              onClick={home}
+            >
               Home
-            </a>
-            {/*<a href="/more" class="mr-5 hover:text-gray-900">Help</a>*/}
-            <a href="/pricing" class="mr-5 hover:text-gray-900">
+            </button>
+            <button
+              class="rounded-lg py-2 px-4 text-black bg-transparent hover:text-grey-700 focus:outline-none"
+              type="button"
+              value="Pricing"
+              onClick={pricing}
+            >
               Pricing
-            </a>
-            <a href="#about" class="mr-5 hover:text-gray-900">
+            </button>
+
+            <button
+              class="rounded-lg py-2 px-4 mr-4 text-black bg-transparent hover:text-grey-700 focus:outline-none"
+              type="button"
+              value="Help"
+              onClick={help}
+            >
+              Help
+            </button>
+
+            {/*<a href="#about" class="mr-5 hover:text-gray-900">
               About
             </a>
             <a href="#contact" class="mr-5 hover:text-gray-900">
               Contact Us
             </a>
-            <a href="#" class="mr-5 hover:text-gray-900">
-              Batch Slips
-              <span class="text-xs ml-2 font-normal text-gray-500">
-                Coming Soon!
-              </span>
-            </a>
-            <a href="#contact" class="mr-5 hover:text-gray-900">
+           <a href="#contact" class="mr-5 hover:text-gray-900">
               <div class="mb-2 mr-2">
                 <button class="rounded-full py-1 px-2 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-100 focus:outline-none">
                   Beta
                 </button>
               </div>
+            </a>*/}
+            <a class="mr-5 hover:text-gray-900">
+              Batch Slips
+              <span class="text-xs ml-2 font-normal text-gray-500">
+                Coming Soon!
+              </span>
             </a>
           </nav>
         </div>
@@ -63,4 +83,4 @@ function NavComponent(props) {
   );
 }
 
-export default NavComponent;
+export default withRouter(NavComponent);

@@ -1,10 +1,8 @@
-import React, { Component, useState, lazy, Suspense } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import {
   BrowserRouter,
-  Router,
   Route,
-  Link,
-  withRouter,
+
 } from "react-router-dom";
 import { Spinner } from "reactstrap";
 import "./App.css";
@@ -24,6 +22,10 @@ const HomeComponentLazy = lazy(() => import("./components/HomeComponent.js"));
 
 const PricingComponentLazy = lazy(() =>
   import("./components/PricingComponent.js")
+);
+
+const HelpComponentLazy = lazy(() =>
+  import("./components/HelpComponent.js")
 );
 
 const HomePageTemplate = (props) => (
@@ -68,6 +70,20 @@ const PricingPageTemplate = (props) => (
   </div>
 );
 
+const HelpPageTemplate = (props) => (
+  <div>
+    <Suspense
+      fallback={
+        <div className="centered">
+          <Spinner style={{ width: "3rem", height: "3rem" }} color="primary" />
+        </div>
+      }
+    >
+      <HelpComponentLazy />
+    </Suspense>
+  </div>
+);
+
 const Landing = () => (
   <LandingPageTemplate title="LandingPage" status="LandingP" />
 );
@@ -76,7 +92,9 @@ const Home = () => <HomePageTemplate title="HomePage" status="HomeP" />;
 const Pricing = () => (
   <PricingPageTemplate title="PricingPage" status="PricingP" />
 );
-
+const Help = () => (
+  <HelpPageTemplate title="HelpPage" status="HelpP" />
+);
 class App extends Component {
   render() {
     return (
@@ -86,6 +104,7 @@ class App extends Component {
           <Route path="/home" component={Landing} />
           <Route path="/app" component={Home} />
           <Route path="/pricing" component={Pricing} />
+          <Route path="/help" component={Help} />
         </div>
       </BrowserRouter>
     );

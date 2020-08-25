@@ -1,14 +1,5 @@
-import React, { useState, lazy } from "react";
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    NavbarText
-  } from 'reactstrap';
+import React, { lazy } from "react";
+
 
   const NavComponentLazy = lazy(() => import("./NavComponent.js"));
 
@@ -17,11 +8,9 @@ import {
 
 function NavComponent(props) {
 
-    const [isOpen, setIsOpen] = useState(false);
+ 
 
-  const toggle = () => setIsOpen(!isOpen);
-
-    return (
+   return (
         <div className="bg-gray-200">
 
         <NavComponentLazy />

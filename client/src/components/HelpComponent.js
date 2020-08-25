@@ -1,66 +1,118 @@
-import React, { useState } from "react";
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    NavbarText
-  } from 'reactstrap';
+import React, { lazy } from "react";
+
+
+const NavComponentLazy = lazy(() => import("./NavComponent.js"));
+
+const FooterComponentLazy = lazy(() => import("./FooterComponent.js"));
 
 
 function NavComponent(props) {
 
-    const [isOpen, setIsOpen] = useState(false);
+ 
 
-  const toggle = () => setIsOpen(!isOpen);
+   return (
+        <div className="bg-gray-200">
 
-    return (
-        <div>
-        {/*<Navbar color="primary" light expand="md">
-          <NavbarBrand href="/">Wera Pay</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              
-      
-              <NavItem>
-                <NavLink href="#">Pricing</NavLink>
-              </NavItem>
+        <NavComponentLazy />
+  
 
-              <NavItem>
-                <NavLink href="https://github.com/jaysonmulwa/werapay">About</NavLink>
-              </NavItem>
+<section class="text-gray-700 body-font">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap">
 
-              <NavItem>
-                <NavLink href="tel:+254 743 10 5448">Contact Us</NavLink>
-              </NavItem>
-              
-            </Nav>
-            <NavbarText>WeraPay v1.0.0</NavbarText>
-          </Collapse>
-        </Navbar>*/}
+  <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Help</h1>
+    </div>
+  
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm">{/*1*/}</div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
 
-        <header class="text-gray-700 body-font">
-          <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-              <span class="ml-3 text-xl">WeraPay</span>
-            </a>
-            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-              <a href="/home" class="mr-5 hover:text-gray-900">Home</a> 
-              <a href="/batch" class="mr-5 hover:text-gray-900">Batch Slips</a>
-              <a href="/more" class="mr-5 hover:text-gray-900">Help</a>
-              <a href="/pricing" class="mr-5 hover:text-gray-900">Pricing</a>
-              <a href="/about" class="mr-5 hover:text-gray-900">About</a>
-              <a href="/contact" class="mr-5 hover:text-gray-900">Contact Us</a>
-            </nav>
-          </div>
-        </header>
+
+        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          {/*<h2 class="font-medium title-font text-gray-900 mb-1 text-xl">Shooting Stars</h2>*/}
+          <p class="leading-relaxed">Werapay recreates your payslip as accurately as possible, therefore enter the Payslip items as they appear on the Payslip.</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+        
+        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <p class="leading-relaxed">Exclude only totals (gross pay, net pay) and headings (Earnings, Deductions etc).{/* Werapay will calculate these automatically, alongside other calculations like PAYE, NSSF, NHIF.*/}</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+        
+        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <p class="leading-relaxed">Click on the Add button. This gives a field for entering the Payslip Item and Amount. Enter these and repeat for all sections.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+
+      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+       
+        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <p class="leading-relaxed">For example, under Earnings, enter Basic Pay in the item field and Enter the amount preferrably with cents - rounded off to two decimal place - as it will appear this way on the slip.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+
+      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+       
+        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <p class="leading-relaxed">Enter Company Details and Personal Details too as they are important to make the final slip detailed and accurate. Also include your company logo.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+
+      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+       
+        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <p class="leading-relaxed">After filling all fields, click Submit. A download link will appear to download your form.</p>
+        </div>
+
+      </div>
+    </div>
+
+    
+  </div>
+</section>
+
+<FooterComponentLazy />
       </div>
     )
   }
