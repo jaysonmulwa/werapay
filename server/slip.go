@@ -65,6 +65,7 @@ type NewSlip struct {
 }
 
 type Response struct {
+
 	NewSlip NewSlip `json:"newSlip"`
 }
 
@@ -87,8 +88,7 @@ func setupRoutes(app *fiber.App) {
 
 	app.Post("/api/v1/personalslip", personalSlip)
 
-	// http.HandlerFunc -> func(*fiber.Ctx)
-	//app.Get("/testing", adaptor.HTTPHandlerFunc(greet))
+	app.Post("/api/v1/sendmail", sendmail)
 
 }
 
@@ -120,6 +120,29 @@ func main() {
 
 }
 
+
+func sendmail(c *fiber.Ctx) {
+
+	mail_slip_name := c.FormValue("mail_slip_name")
+	mail_send_name := c.FormValue("mail_send_name")
+	mail_send_email := c.FormValue("mail_send_email")
+
+	//Send Mail
+	status, err := sendEmail(mail_slip_name, mail_send_name, mail_send_email)
+
+	if err != nil {
+
+		fmt.Println("error!")
+		panic(err)
+		c.Status(500).Send("Failed")
+
+	}else{
+
+		c.Send(status)
+
+	}
+	
+}
 
 func personalSlip(c *fiber.Ctx) {
 
@@ -224,15 +247,12 @@ func personalSlip(c *fiber.Ctx) {
 	//Content
 	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", Name)
 	summaryBlock(pdf, xIndent, bannerHt+lineHt*5.25, "ID No.", ID)
-
 	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", p.Position)
 	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*5.25, "KRA PIN", p.KRA)
-
 	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*2.0, "Department", Department)
 	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*5.25, "Payroll No.", p.Payroll)
 
-	//payCodesTitle()
-
+	//PaycodesContent
 	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5-2*lineHt*0.75, "Earnings")
 
 	for i, _ := range P_E {
@@ -297,26 +317,22 @@ func personalSlip(c *fiber.Ctx) {
 	next = next + 2.0
 
 	//Footer Notes
-
 	pdf.SetFont("arial", "", 12)
 	pdf.SetTextColor(180, 180, 180)
 	pdf.Text(xIndent, 290, "Signature:")
 	//pdf.Line(43, 290, 105, 290)
 	pdf.Text(w/2+xIndent/2, 290, "Bank:  "+p.Bank+" "+p.Acc)
 	//pdf.Line(136, 290, w-xIndent, 290)
-
 	//drawGrid(pdf)
 
 	slip_name = "payslip_" + Name + "_" + p.Month + "_" + p.Year + ".pdf"
-
 	err := pdf.OutputFileAndClose("./slips/"+ slip_name)
 
 	//Clear Out Variables
 	gross_pay = 0.0
-
 	gross_deductions = 0.0
-
 	net_pay = 0.0
+
 	
 
 	if err != nil {

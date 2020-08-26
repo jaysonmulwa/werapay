@@ -69,6 +69,14 @@ class HomeComponent extends Component {
 
 		downloaded: false,
 
+		mail_sent:false,
+
+		allowEmail: false,
+
+		send_to_name:"",
+
+		send_to_email: "",
+
 		slip_name: ""
 	};
 
@@ -103,6 +111,8 @@ class HomeComponent extends Component {
 
 		console.log(this.state);
 	};
+
+	
 
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
@@ -193,6 +203,65 @@ class HomeComponent extends Component {
 		});
 	};
 
+	handleAllowEmail = (e) =>{
+
+		e.preventDefault();
+
+		this.setState({
+			mail_sent: false,
+			allowEmail: true,
+		});
+
+
+	}
+
+	handleSendAsMail = (e) =>{
+
+		e.preventDefault();
+
+		const {
+			slip_name,
+			send_to_name,
+			send_to_email,
+		} = this.state;
+
+		const newMail = new FormData();
+
+		newMail.append("mail_slip_name", slip_name);
+		newMail.append("mail_send_name", send_to_name);
+		newMail.append("mail_send_email", send_to_email);
+
+		this.setState({
+			mail_sent: false,
+		});
+
+		const link = endpoint + "/api/v1/sendmail";
+		//const link = "/api/v1/sendmail";
+
+		const config = {
+			headers: {
+				"Content-Type":
+					"multipart/form-data; boundary=--------------------------811161660471543283806813",
+			},
+		};
+
+		if (newMail) {
+			axios.post(link, newMail, config).then((res) => {
+				if (res.data !== "Failed") {
+
+					console.log(res.data);	
+
+					this.setState({
+						allowEmail:false,
+						mail_sent: true,
+					});
+				}
+			});
+		}
+
+
+	}
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 
@@ -243,12 +312,11 @@ class HomeComponent extends Component {
 		newSlip.append("paycode_t", paycode_t);
 		newSlip.append("amount_t", amount_t);
 
-		//console.log(this.state);
-
-		//console.log(newSlip);
 
 		this.setState({
 			downloaded: false,
+			mail_sent: false,
+			allowEmail: false,
 		});
 
 		const link = endpoint + "/api/v1/personalslip";
@@ -732,6 +800,8 @@ class HomeComponent extends Component {
 										placeholder=""
 										onChange={this.onChange}
 									>
+										<option value="--">-- Select Month --</option>
+
 										<option value="JANUARY">January</option>
 										<option value="FEBRUARY">
 											February
@@ -819,7 +889,19 @@ class HomeComponent extends Component {
 											download
 										>
 											Download File
-										</a>
+										</a> or 
+
+										
+										<button
+											class="rounded-lg mx-3 py-2 px-4 text-blue-600 bg-gray-100 hover:bg-blue-600 hover:text-white focus:outline-none"
+											type="button"
+											value="Send as Mail"
+											onClick={(e) => this.handleAllowEmail(e)}
+										>
+											Send as Mail
+										</button>
+
+
 										{/*href="http://localhost:5000/slips/payslip.pdf"*/}
 										{/*href="/slips/payslip.pdf"*/}
 									</center>
@@ -828,6 +910,78 @@ class HomeComponent extends Component {
 						</section>
 					</Fade>
 				)}
+
+				{this.state.allowEmail && (
+
+					<Fade in={true} out={true}>
+					<section class="text-gray-700 body-font">
+						<div class="container py-6 mx-auto flex">
+							<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+							<div class="flex flex-col md:flex-row -mx-3">
+								<div class="w-12/12 lg:w-5/12 px-3">
+								<input
+									class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline w-full"
+									type="text"
+									name="send_to_name"
+									id="send_to_name"
+									placeholder="Recepient Name"
+									onChange={this.onChange}
+								/>
+								</div>
+
+								<div class="w-12/12 md:w-5/12 px-3">
+								<input
+									class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline w-full"
+									type="email"
+									name="send_to_email"
+									id="send_to_email"
+									placeholder="Recepient Email Address"
+									onChange={this.onChange}
+								/>
+								</div>
+
+							
+
+							<div class="w-1/12 md:w-3/12 px-3">
+										<button
+											class="rounded-lg mx-3 py-2 px-4 text-white bg-blue-600 hover:bg-blue-500 focus:outline-none"
+											type="button"
+											value="Send as Mail"
+											onClick={(e) => this.handleSendAsMail(e)}
+										>
+											Send
+									</button>
+							</div>
+						</div>
+							</div>
+						</div>
+
+						
+
+					</section>
+					</Fade>
+
+
+				)}
+
+				{this.state.mail_sent && (
+
+					<Fade in={true} out={true}>
+					<section class="text-gray-700 body-font">
+
+						<div class="container py-6 mx-auto flex">
+							<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+								<center>
+									Sent!										
+								</center>
+							</div>
+						</div>
+
+					</section>
+					</Fade>
+
+				)}
+
 
 				<FooterComponentLazy />
 			</div>
