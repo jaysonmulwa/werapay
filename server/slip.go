@@ -10,6 +10,7 @@ import (
 	"golang.org/x/text/message"
 	"log"
 	"os"
+	"sync"
 	"strconv"
 	"strings"
     "github.com/leekchan/accounting"
@@ -18,6 +19,9 @@ import (
 // "github.com/gofiber/adaptor"
 
 var file = "payslip.pdf"
+var (
+    mutex   sync.Mutex
+)
 
 const (
 	bannerHt = 42.0
@@ -167,6 +171,7 @@ func personalSlip(c *fiber.Ctx) {
 
 	//Display File on Slip
 	file, erra := c.FormFile("file")
+	filename := file.Filename
 
 	// Check for errors:
 	if erra == nil {
@@ -183,6 +188,10 @@ func personalSlip(c *fiber.Ctx) {
 	ID := c.FormValue("idno")
 	Department := c.FormValue("idno")
 	Name := c.FormValue("fname")
+
+	p.ID = ID
+	p.Department = Department
+	p.Name = Name
 
 
 	//Problematic array
@@ -203,58 +212,28 @@ func personalSlip(c *fiber.Ctx) {
 	pdf := gofpdf.New("P", "mm", "A4", "")
 
 	w, _ := pdf.GetPageSize()
-
 	pdf.AddPage()
 	pdf.SetFont("arial", "B", 16)
-
-	// Top Banner
-	pdf.SetFillColor(0, 191, 255)
-
-	pdf.Polygon([]gofpdf.PointType{
-
-		{0, bannerHt},
-		{w, bannerHt},
-		{w, 2.125 * bannerHt},
-		{0, 2.125 * bannerHt},
-	}, "F")
-
+	
 	_, lineHt := pdf.GetFontSize()
 
-	if erra == nil {
+	//go routines
+	var wg sync.WaitGroup
+	wg.Add(3)
 
-		// Banner - Logo
-		pdf.Image("images/"+file.Filename, xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
+	go blueBanner(w, pdf, &wg)
+	go slipLogo(erra, filename, pdf, &wg)
+	go slipAddress(w, p, pdf, &wg)
+	
+	wg.Wait()
 
-	}
+	headerMonth(w, p, pdf)
+	headerContent(p, pdf)
 
+	
 
-	// Banner - Address
-	pdf.SetFont("arial", "", 12)
-	pdf.SetTextColor(0, 0, 0)
-	_, lineHt = pdf.GetFontSize()
-	pdf.MoveTo(w-xIndent-124.0, (bannerHt-(lineHt*1.5*3.0))/2.0)
-	pdf.MultiCell(124.0, lineHt*1.5, p.Cname+"\n"+p.Caddr, gofpdf.BorderNone, gofpdf.AlignRight, false)
-
-	//Header - Payslip (month)
-
-	pdf.SetFont("arial", "", 16)
-	pdf.SetTextColor(255, 255, 255)
-
-	_, lineHt = pdf.GetFontSize()
-
-	pdf.Text(w/3, bannerHt+lineHt*1.0, "PAYSLIP FOR "+p.Month+" "+p.Year)
-
-	//Content
-	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", Name)
-	summaryBlock(pdf, xIndent, bannerHt+lineHt*5.25, "ID No.", ID)
-	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", p.Position)
-	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*5.25, "KRA PIN", p.KRA)
-	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*2.0, "Department", Department)
-	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*5.25, "Payroll No.", p.Payroll)
-
-	//PaycodesContent
+	//Paycodes Content
 	payCodesTitle(pdf, xIndent*2.5, bannerHt+lineHt*10.5-2*lineHt*0.75, "Earnings")
-
 	for i, _ := range P_E {
 
 		payCodes(pdf, xIndent*2.5, bannerHt+lineHt*10.5+(2*float64(i))*lineHt*0.75, P_E[i], A_E[i])
@@ -351,7 +330,68 @@ func personalSlip(c *fiber.Ctx) {
 
 }
 
-func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) (float64, float64) {
+
+func blueBanner(w float64, pdf *gofpdf.Fpdf, wg *sync.WaitGroup){
+
+	defer wg.Done()
+	pdf.SetFillColor(0, 191, 255)
+	pdf.Polygon([]gofpdf.PointType{
+		{0, bannerHt},
+		{w, bannerHt},
+		{w, 2.125 * bannerHt},
+		{0, 2.125 * bannerHt},
+	}, "F")
+	
+}
+
+func slipLogo(erra error, filename string, pdf *gofpdf.Fpdf, wg *sync.WaitGroup){
+
+	defer wg.Done()
+	if erra == nil {
+		// Banner - Logo
+		pdf.Image("images/" + filename, xIndent, 0+(bannerHt-(bannerHt/1.5))/2.0, 30, 0, false, "", 0, "")
+
+	}
+	
+}
+
+func slipAddress(w float64, p *NewSlip, pdf *gofpdf.Fpdf, wg *sync.WaitGroup){
+
+	defer wg.Done()
+	pdf.SetFont("arial", "", 12)
+	pdf.SetTextColor(0, 0, 0)
+	_, lineHt := pdf.GetFontSize()
+	pdf.MoveTo(w-xIndent-124.0, (bannerHt-(lineHt*1.5*3.0))/2.0)
+	pdf.MultiCell(124.0, lineHt*1.5, p.Cname+"\n"+p.Caddr, gofpdf.BorderNone, gofpdf.AlignRight, false)
+	
+}
+
+func headerMonth(w float64, p *NewSlip, pdf *gofpdf.Fpdf){
+
+
+	pdf.SetFont("arial", "", 16)
+	pdf.SetTextColor(255, 255, 255)
+	_, lineHt := pdf.GetFontSize()
+	pdf.Text(w/3, bannerHt+lineHt*1.0, "PAYSLIP FOR "+p.Month+" "+p.Year)
+	
+}
+
+func headerContent(p *NewSlip, pdf *gofpdf.Fpdf){
+
+	
+	_, lineHt := pdf.GetFontSize()
+	summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Name", p.Name)
+	summaryBlock(pdf, xIndent, bannerHt+lineHt*5.25, "ID No.", p.ID)
+	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*2.0, "Designation", p.Position)
+	summaryBlock(pdf, xIndent*4, bannerHt+lineHt*5.25, "KRA PIN", p.KRA)
+	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*2.0, "Department", p.Department)
+	summaryBlock(pdf, xIndent*8, bannerHt+lineHt*5.25, "Payroll No.", p.Payroll)
+	
+}
+
+func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) {
+
+
 	pdf.SetFont("arial", "", 14)
 	pdf.SetTextColor(255, 255, 255)
 	_, lineHt := pdf.GetFontSize()
@@ -363,7 +403,9 @@ func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) 
 		y = y + lineHt*1.25
 		pdf.Text(x, y, str)
 	}
-	return x, y
+
+	
+	
 }
 
 func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
@@ -408,9 +450,7 @@ func payCodesTotals(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount strin
 	y = y + lineHt
 	pdf.Text(x-10, y, paycode)
 	
-
 	pdf.SetTextColor(50, 50, 50)
-	//pdf.Text((w - xIndent*4), y, amount)
 
 	f, _ := strconv.ParseFloat(amount, 64)
 
