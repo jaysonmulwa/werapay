@@ -83,7 +83,6 @@ func serveStatic(app *fiber.App) {
 	app.Static("/pricing", "./build")
 	app.Static("/batch", "./build")
 	app.Static("/help", "./build")
-
 	
 
 }
@@ -196,15 +195,10 @@ func personalSlip(c *fiber.Ctx) {
 
 	//Problematic array
 	P_E = strings.Split(c.FormValue("paycode_e"), ",")
-
 	A_E = strings.Split(c.FormValue("amount_e"), ",")
-
 	P_D = strings.Split(c.FormValue("paycode_d"), ",")
-
 	A_D = strings.Split(c.FormValue("amount_d"), ",")
-
 	P_T = strings.Split(c.FormValue("paycode_t"), ",")
-
 	A_T = strings.Split(c.FormValue("amount_t"), ",")
 
 	

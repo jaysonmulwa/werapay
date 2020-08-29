@@ -6,7 +6,7 @@ const NavAlt2ComponentLazy = lazy(() => import("./NavAlt2Component.js"));
 const FooterComponentLazy = lazy(() => import("./FooterComponent.js"));
 
 
-function NavComponent(props) {
+function TermsComponent(props) {
 
  
 
@@ -20,7 +20,7 @@ function NavComponent(props) {
   <div class="container px-5 py-24 mx-auto flex flex-wrap">
 
   <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Help</h1>
+      <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Terms of Use</h1>
     </div>
   
     <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
@@ -117,4 +117,4 @@ function NavComponent(props) {
     )
   }
 
-export default NavComponent;
+export default TermsComponent;

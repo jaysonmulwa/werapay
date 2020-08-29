@@ -8,6 +8,7 @@ import { Spinner } from "reactstrap";
 import "./App.css";
 import "./styles.generated.css";
 
+
 import ReactGA from "react-ga";
 
 const trackingId = "UA-175798173-1"; // Replace with your Google Analytics tracking ID
@@ -27,6 +28,15 @@ const PricingComponentLazy = lazy(() =>
 const HelpComponentLazy = lazy(() =>
   import("./components/HelpComponent.js")
 );
+
+const PrivacyComponentLazy = lazy(() =>
+  import("./components/PrivacyComponent.js")
+);
+
+const TermsComponentLazy = lazy(() =>
+  import("./components/TermsComponent.js")
+);
+
 
 const HomePageTemplate = (props) => (
   <div>
@@ -83,6 +93,34 @@ const HelpPageTemplate = (props) => (
     </Suspense>
   </div>
 );
+const PrivacyPageTemplate = (props) => (
+  <div>
+    <Suspense
+      fallback={
+        <div className="centered">
+          <Spinner style={{ width: "3rem", height: "3rem" }} color="primary" />
+        </div>
+      }
+    >
+      <PrivacyComponentLazy />
+    </Suspense>
+  </div>
+);
+
+const TermsPageTemplate = (props) => (
+  <div>
+    <Suspense
+      fallback={
+        <div className="centered">
+          <Spinner style={{ width: "3rem", height: "3rem" }} color="primary" />
+        </div>
+      }
+    >
+      <TermsComponentLazy />
+    </Suspense>
+  </div>
+);
+
 
 const Landing = () => (
   <LandingPageTemplate title="LandingPage" status="LandingP" />
@@ -95,6 +133,14 @@ const Pricing = () => (
 const Help = () => (
   <HelpPageTemplate title="HelpPage" status="HelpP" />
 );
+
+const Privacy = () => (
+  <PrivacyPageTemplate title="PrivacyPage" status="PrivacyP" />
+);
+const Terms = () => (
+  <TermsPageTemplate title="TermsPage" status="TermsP" />
+);
+
 class App extends Component {
   render() {
     return (
@@ -105,6 +151,8 @@ class App extends Component {
           <Route path="/app" component={Home} />
           <Route path="/pricing" component={Pricing} />
           <Route path="/help" component={Help} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/terms" component={Terms} />
         </div>
       </BrowserRouter>
     );

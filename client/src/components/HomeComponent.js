@@ -8,7 +8,7 @@ import {
 	
 } from "reactstrap";
 
-const NavComponentLazy = lazy(() => import("./NavComponent.js"));
+const NavAlt2ComponentLazy = lazy(() => import("./NavAlt2Component.js"));
 
 const JumboComponentLazy = lazy(() => import("./JumboComponent.js"));
 
@@ -383,7 +383,7 @@ class HomeComponent extends Component {
 
 							<div class="w-1/12 md:w-2/12 px-3">
 								<button
-									class="rounded-lg py-2 px-4 text-red-600 bg-gray-100 hover:bg-red-600 hover:text-white focus:outline-none"
+									class="rounded-lg py-2 px-4 text-luminous-red bg-gray-100 hover:bg-luminous-red hover:text-white focus:outline-none"
 									type="button"
 									color="danger"
 									value="remove"
@@ -435,7 +435,7 @@ class HomeComponent extends Component {
 
 							<div class="w-1/12 md:w-2/12 px-3">
 								<button
-									class="rounded-lg py-2 px-4 text-red-600 bg-gray-100 hover:bg-red-600 hover:text-white focus:outline-none"
+									class="rounded-lg py-2 px-4 text-luminous-red bg-gray-100 hover:bg-luminous-red hover:text-white focus:outline-none"
 									type="button"
 									value="remove"
 									onClick={this.removeClick_d.bind(this, i)}
@@ -486,7 +486,7 @@ class HomeComponent extends Component {
 
 							<div class="w-1/12 md:w-2/12 px-3">
 								<button
-									class="rounded-lg py-2 px-4 text-red-600 bg-gray-100 hover:bg-red-600 hover:text-white focus:outline-none"
+									class="rounded-lg py-2 px-4 text-luminous-red bg-gray-100 hover:bg-luminous-red hover:text-white focus:outline-none"
 									type="button"
 									value="remove"
 									onClick={this.removeClick_t.bind(this, i)}
@@ -504,7 +504,7 @@ class HomeComponent extends Component {
 	render() {
 		return (
 			<div className="bg-gray-200">
-				<NavComponentLazy />
+				<NavAlt2ComponentLazy />
 				<JumboComponentLazy />
 
 				{/*Earnings*/}
@@ -519,7 +519,7 @@ class HomeComponent extends Component {
 
 							<div class="mb-2 mr-2">
 								<button
-									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
+									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-luminous-green focus:outline-none"
 									value="add more"
 									onClick={this.addClick_e.bind(this)}
 								>
@@ -543,7 +543,7 @@ class HomeComponent extends Component {
 
 							<div class="mb-2 mr-2">
 								<button
-									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
+									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-luminous-green focus:outline-none"
 									value="add more"
 									onClick={this.addClick_d.bind(this)}
 								>
@@ -567,7 +567,7 @@ class HomeComponent extends Component {
 
 							<div class="mb-2 mr-2">
 								<button
-									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-green-600 focus:outline-none"
+									class="rounded-lg py-2 px-4 text-white bg-gray-600 hover:bg-luminous-green focus:outline-none"
 									value="add more"
 									onClick={this.addClick_t.bind(this)}
 								>
@@ -688,7 +688,7 @@ class HomeComponent extends Component {
 								class="block text-gray-700 text-sm font-medium mb-2"
 								for="companyaddress"
 							>
-								KRA PIN
+								Tax PIN
 							</label>
 
 							<input
@@ -862,7 +862,7 @@ class HomeComponent extends Component {
 
 									<div class="mb-2 mr-2">
 										<button
-											class="rounded-lg py-2 px-4 text-white bg-blue-600 hover:bg-blue-500 focus:outline-none"
+											class="rounded-lg py-2 px-4 text-white bg-luminous-blue hover:bg-blue-600 focus:outline-none"
 											value="add more"
 											type="submit"
 										>
@@ -893,7 +893,7 @@ class HomeComponent extends Component {
 
 										
 										<button
-											class="rounded-lg mx-3 py-2 px-4 text-blue-600 bg-gray-100 hover:bg-blue-600 hover:text-white focus:outline-none"
+											class="rounded-lg mx-3 py-2 px-4 text-blue-600 bg-gray-100 hover:bg-luminous-blue hover:text-white focus:outline-none"
 											type="button"
 											value="Send as Mail"
 											onClick={(e) => this.handleAllowEmail(e)}
@@ -940,11 +940,11 @@ class HomeComponent extends Component {
 								/>
 								</div>
 
-							
+				
 
 							<div class="w-1/12 md:w-3/12 px-3">
 										<button
-											class="rounded-lg mx-3 py-2 px-4 text-white bg-blue-600 hover:bg-blue-500 focus:outline-none"
+											class="rounded-lg mx-3 py-2 px-4 text-white bg-luminous-blue hover:bg-blue-600 focus:outline-none"
 											type="button"
 											value="Send as Mail"
 											onClick={(e) => this.handleSendAsMail(e)}
