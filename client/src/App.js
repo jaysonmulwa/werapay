@@ -37,6 +37,18 @@ const TermsComponentLazy = lazy(() =>
   import("./components/TermsComponent.js")
 );
 
+const PAYEComponentLazy = lazy(() =>
+  import("./components/calculators/PAYECalculator.js")
+);
+
+const NHIFComponentLazy = lazy(() =>
+  import("./components/calculators/NHIFCalculator.js")
+);
+
+const NSSFComponentLazy = lazy(() =>
+  import("./components/calculators/NSSFCalculator.js")
+);
+
 
 const HomePageTemplate = (props) => (
   <div>
@@ -121,6 +133,47 @@ const TermsPageTemplate = (props) => (
   </div>
 );
 
+const PAYEPageTemplate = (props) => (
+  <div>
+    <Suspense
+      fallback={
+        <div className="centered">
+          <Spinner style={{ width: "3rem", height: "3rem" }} color="primary" />
+        </div>
+      }
+    >
+      <PAYEComponentLazy />
+    </Suspense>
+  </div>
+);
+const NSSFPageTemplate = (props) => (
+  <div>
+    <Suspense
+      fallback={
+        <div className="centered">
+          <Spinner style={{ width: "3rem", height: "3rem" }} color="primary" />
+        </div>
+      }
+    >
+      <NSSFComponentLazy />
+    </Suspense>
+  </div>
+);
+
+const NHIFPageTemplate = (props) => (
+  <div>
+    <Suspense
+      fallback={
+        <div className="centered">
+          <Spinner style={{ width: "3rem", height: "3rem" }} color="primary" />
+        </div>
+      }
+    >
+      <NHIFComponentLazy />
+    </Suspense>
+  </div>
+);
+
 
 const Landing = () => (
   <LandingPageTemplate title="LandingPage" status="LandingP" />
@@ -140,6 +193,16 @@ const Privacy = () => (
 const Terms = () => (
   <TermsPageTemplate title="TermsPage" status="TermsP" />
 );
+const PAYE = () => (
+  <PAYEPageTemplate title="PAYEPage" status="PAYEP" />
+);
+
+const NHIF = () => (
+  <NHIFPageTemplate title="NHIFPage" status="NHIFP" />
+);
+const NSSF = () => (
+  <NSSFPageTemplate title="NSSFPage" status="NSSFP" />
+);
 
 class App extends Component {
   render() {
@@ -153,6 +216,9 @@ class App extends Component {
           <Route path="/help" component={Help} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />
+          <Route path="/paye" component={PAYE} />
+          <Route path="/nhif" component={NHIF} />
+          <Route path="/nssf" component={NSSF} />
         </div>
       </BrowserRouter>
     );

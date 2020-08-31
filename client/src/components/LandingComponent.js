@@ -21,7 +21,7 @@ class LandingComponent extends Component {
                 WeraPay
                 <br class="hidden lg:inline-block" />
               </h1>
-              <p class="leading-loose mb-2 title-font text-lg font-normal">
+              <p class="leading-loose mb-2 title-font text-lg font-medium">
                 Need to generate a quick payslip for personal use or payslips for your entire company?.
                 <br/>
                 
@@ -31,34 +31,57 @@ class LandingComponent extends Component {
              
               {/**/}
            
-              <div class="flex flex-wrap lg:w-4/5 sm:mb-2">
+              <div class="flex flex-wrap lg:w-4/5 mb-4">
 
                 <div class="py-2 px-0 sm:w-1/2 w-full">
-                  <div class="bg-transparent rounded flex p-2 h-full items-center">
+                  <div class="bg-transparent rounded flex h-full items-center">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-luminous-blue w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
                       <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                       <path d="M22 4L12 14.01l-3-3"></path>
                     </svg>
-                    <span class="title-font font-medium">Payslip generation</span>
+                    <span class="title-font font-medium">Payslip Generation</span>
                   </div>
                 </div>
 
                 <div class="py-2 px-0 sm:w-1/2 w-full">
-                  <div class="bg-transparent rounded flex p-2 h-full items-center">
+                  <div class="bg-transparent rounded flex h-full items-center">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-luminous-blue w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
                       <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                       <path d="M22 4L12 14.01l-3-3"></path>
                     </svg>
-                    <span class="title-font font-medium">Email payslips</span>
+                    <span class="title-font font-medium">Batch Processing</span>
                   </div>
                 </div>
+
+                <div class="py-2 px-0 sm:w-1/2 w-full">
+                  <div class="bg-transparent rounded flex h-full items-center">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-luminous-blue w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                      <path d="M22 4L12 14.01l-3-3"></path>
+                    </svg>
+                    <span class="title-font font-medium">Email Payslips</span>
+                  </div>
+                </div>
+
+                <div class="py-2 px-0 sm:w-1/2 w-full">
+                  <div class="bg-transparent rounded flex h-full items-center">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-luminous-blue w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                      <path d="M22 4L12 14.01l-3-3"></path>
+                    </svg>
+                    <span class="title-font font-medium">Tax Calculators</span>
+                  </div>
+                </div>
+
               </div>
-            
+
+              
+    
               {/**/}
 
               <div class="flex justify-center">
               <button
-                  class="inline-flex text-white bg-luminous-blue border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-lg font-medium"
+                  class="inline-flex text-white bg-luminous-blue border-0 py-3 px-12 focus:outline-none hover:bg-gray-600 rounded text-lg font-medium"
                   type="button"
                   onClick={this.getStarted}
                 >
@@ -67,7 +90,6 @@ class LandingComponent extends Component {
               </div>
 
              
-
             </div>
             <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 z-20">
           
@@ -96,25 +118,8 @@ class LandingComponent extends Component {
           <div class="container px-4 pb-4 mx-auto flex flex-wrap">
             <div class="flex flex-wrap">
 
-              <div class="p-2 lg:w-1/3 md:w-full">
-                <div class="flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col">
-                  <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-luminous-blue flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-anchor" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0003ff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"/>
-                    <path d="M12 9v12m-8 -8a8 8 0 0 0 16 0m1 0h-2m-14 0h-2" />
-                    <circle cx="12" cy="6" r="3" />
-                  </svg>
-                  </div>
-                  <div class="flex-grow">
-                    <h2 class="text-gray-900 text-xl title-font font-bold mb-3">
-                      Reliable
-                    </h2>
-                    <p class="leading-relaxed text-lg font-medium">
-                      We harness the power of technology to give you a timeless product.
-                    </p>
-                  </div>
-                </div>
-              </div>
+             
+
               <div class="p-2 lg:w-1/3 md:w-full">
                 <div class="flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col">
                   <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
@@ -156,6 +161,30 @@ class LandingComponent extends Component {
                   </div>
                 </div>
               </div>
+
+              <div class="p-2 lg:w-1/3 md:w-full">
+                <div class="flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col">
+                  <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-luminous-blue flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-anchor" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0003ff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z"/>
+                    <path d="M12 9v12m-8 -8a8 8 0 0 0 16 0m1 0h-2m-14 0h-2" />
+                    <circle cx="12" cy="6" r="3" />
+                  </svg>
+                  </div>
+                  <div class="flex-grow">
+                    <h2 class="text-gray-900 text-xl title-font font-bold mb-3">
+                      Reliable
+                    </h2>
+                    <p class="leading-relaxed text-lg font-medium">
+                      We harness the power of technology to give you a timeless product.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+
+
             </div>
           </div>
 

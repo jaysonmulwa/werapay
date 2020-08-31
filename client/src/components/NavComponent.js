@@ -20,7 +20,7 @@ function NavComponent(props) {
     <div>
       <header class="text-gray-700 body-font">
         <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
-          <a class="flex title-font font-medium items-center text-gray-900 md:mb-0">
+          <a class="flex title-font font-medium items-center text-gray-900 md:mb-0 pt-2 md:py-0">
             <img
               src="2.png"
               alt="triangle with all three sides equal"
@@ -30,7 +30,7 @@ function NavComponent(props) {
             />
             <span class="ml-3 text-xl">WeraPay</span>
           </a>
-          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center pt-2 md:py-0">
             <button
               class="rounded-lg py-2 px-4 text-black bg-transparent hover:text-grey-700 focus:outline-none font-medium hover:text-luminous-blue"
               type="button"

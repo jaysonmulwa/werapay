@@ -4,21 +4,18 @@ import (
 	"fmt"
 	"github.com/gofiber/cors"
 	"github.com/gofiber/fiber"
-	"github.com/jinzhu/gorm"
 	"github.com/jung-kurt/gofpdf"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
+	"github.com/leekchan/accounting"
 	"log"
 	"os"
 	"sync"
 	"strconv"
 	"strings"
-    "github.com/leekchan/accounting"
+    
 )
 
-// "github.com/gofiber/adaptor"
-
-var file = "payslip.pdf"
 var (
     mutex   sync.Mutex
 )
@@ -29,8 +26,6 @@ const (
 )
 
 var (
-
-	DBConn *gorm.DB
 
 	next   = 0.0
 
@@ -123,29 +118,6 @@ func main() {
 
 }
 
-
-func sendmail(c *fiber.Ctx) {
-
-	mail_slip_name := c.FormValue("mail_slip_name")
-	mail_send_name := c.FormValue("mail_send_name")
-	mail_send_email := c.FormValue("mail_send_email")
-
-	//Send Mail
-	status, err := sendEmail(mail_slip_name, mail_send_name, mail_send_email)
-
-	if err != nil {
-
-		fmt.Println("error!")
-		panic(err)
-		c.Status(500).Send("Failed")
-
-	}else{
-
-		c.Send(status)
-
-	}
-	
-}
 
 func personalSlip(c *fiber.Ctx) {
 
@@ -402,7 +374,31 @@ func summaryBlock(pdf *gofpdf.Fpdf, x, y float64, title string, data ...string) 
 	
 }
 
+func sendmail(c *fiber.Ctx) {
+
+	mail_slip_name := c.FormValue("mail_slip_name")
+	mail_send_name := c.FormValue("mail_send_name")
+	mail_send_email := c.FormValue("mail_send_email")
+
+	//Send Mail
+	status, err := sendEmail(mail_slip_name, mail_send_name, mail_send_email)
+
+	if err != nil {
+
+		fmt.Println("error!")
+		panic(err)
+		c.Status(500).Send("Failed")
+
+	}else{
+
+		c.Send(status)
+
+	}
+	
+}
+
 func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
+
 	w, _ := pdf.GetPageSize()
 	pdf.SetFont("arial", "", 12)
 	pdf.SetTextColor(50, 50, 50)
@@ -411,12 +407,10 @@ func payCodes(pdf *gofpdf.Fpdf, x, y float64, paycode string, amount string) {
 	pdf.Text(x, y, paycode)
 
 	pdf.SetTextColor(50, 50, 50)
-	//pdf.Text((w - xIndent*4), y, amount)
 	f, _ := strconv.ParseFloat(amount, 64)
 
 	ac := accounting.Accounting{Symbol: "", Precision: 2}
     amt := ac.FormatMoney(f)
-
 
 
 	pdf.SetXY((w - xIndent*4),y-3.5)

@@ -27,86 +27,155 @@ function TermsComponent(props) {
       <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
       </div>
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm">{/*1*/}</div>
       <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-
-
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          {/*<h2 class="font-medium title-font text-gray-900 mb-1 text-xl">Shooting Stars</h2>*/}
-          <p class="leading-relaxed">Werapay recreates your payslip as accurately as possible, therefore enter the Payslip items as they appear on the Payslip.</p>
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">1. Terms</h2>
+          <p class="leading-relaxed">
+          By accessing this web site, you are agreeing to be bound by these web site Terms and Conditions of Use, our Privacy Policy, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this web site are protected by applicable copyright and trade mark law.
+          </p>
         </div>
 
       </div>
     </div>
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
       <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
       </div>
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
       <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-        
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">Exclude only totals (gross pay, net pay) and headings (Earnings, Deductions etc).{/* Werapay will calculate these automatically, alongside other calculations like PAYE, NSSF, NHIF.*/}</p>
-        </div>
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">2. Use License</h2>
+          <p class="leading-relaxed">
+          Permission is granted to temporarily download one copy of the materials (information or software) on WeraPay's web site for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+          
+          <br/>i) modify or copy the materials;
+          <br/>ii) use the materials for any commercial purpose, or for any public display (commercial or non-commercial);
+          <br/>iii) attempt to decompile or reverse engineer any software contained on WeraPay's web site;
+          <br/>iv) remove any copyright or other proprietary notations from the materials; or
+          <br/>v) transfer the materials to another person or "mirror" the materials on any other server.
+
+          <br/>This license shall automatically terminate if you violate any of these restrictions and may be terminated by WeraPay at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.
+          </p>
+                  </div>
+
       </div>
     </div>
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
       <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
       </div>
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
       <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-        
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">Click on the Add button. This gives a field for entering the Payslip Item and Amount. Enter these and repeat for all sections.</p>
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">3. Disclaimer</h2>
+          <p class="leading-relaxed">
+          The materials on WeraPay's web site are provided "as is". WeraPay makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, WeraPay does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet web site or otherwise relating to such materials or on any sites linked to this site.</p>
         </div>
+
       </div>
     </div>
 
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
       <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
       </div>
-
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
       <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-       
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">For example, under Earnings, enter Basic Pay in the item field and Enter the amount preferrably with cents - rounded off to two decimal place - as it will appear this way on the slip.</p>
-        </div>
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">4. Limitations</h2>
+          <p class="leading-relaxed">
+          In no event shall WeraPay or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on WeraPay's Internet site, even if WeraPay or an authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+          </p> </div>
 
       </div>
     </div>
 
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
       <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
       </div>
-
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
       <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-       
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">Enter Company Details and Personal Details too as they are important to make the final slip detailed and accurate. Also include your company logo.</p>
-        </div>
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">5. Revisions and Errata</h2>
+          <p class="leading-relaxed">
+          The materials appearing on WeraPay's web site could include technical, typographical, or photographic errors. WeraPay does not warrant that any of the materials on its web site are accurate, complete, or current. WeraPay may make changes to the materials contained on its web site at any time without notice. WeraPay does not, however, make any commitment to update the materials.</p> </div>
 
       </div>
     </div>
 
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
       <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
       </div>
-
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
       <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-       
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">After filling all fields, click Submit. A download link will appear to download your form.</p>
-        </div>
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">6. Links</h2>
+          <p class="leading-relaxed">
+          WeraPay has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by WeraPay of the site. Use of any such linked web site is at the user's own risk.
+          </p> </div>
 
       </div>
     </div>
+
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">7. Site Terms of Use Modifications</h2>
+          <p class="leading-relaxed">
+          WeraPay may revise these terms of use for its web site at any time without notice. By using this web site you are agreeing to be bound by the then current version of these Terms and Conditions of Use.</p> </div>
+
+      </div>
+    </div>
+
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">8. WeraPay Trademarks and Logos Policy</h2>
+          <p class="leading-relaxed">
+          All uses of the WeraPay logo, WeraPay badges, brand slogans, iconography, and the like, may only be used with express permission from WeraPay. WeraPay reserves all rights, even if certain assets are included in WeraPay open source projects. Please contact jayson.mulwa@gmail.com with any questions or to request permission.</p> </div>
+
+      </div>
+    </div>
+
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">9. Reserved Names</h2>
+          <p class="leading-relaxed">
+          WeraPay has the right to maintain a list of reserved names which will not be made publicly available. These reserved names may be set aside for purposes of proactive trademark protection, avoiding user confusion, security measures, or any other reason (or no reason).
+
+          Additionally, WeraPay reserves the right to change any already-claimed name at its sole discretion. In such cases, WeraPay will make reasonable effort to find a suitable alternative and assist with any transition-related concerns.</p> </div>
+
+      </div>
+    </div>
+
+    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+      </div>
+      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+          <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">10. Governing Law</h2>
+          <p class="leading-relaxed">
+          Any claim relating to WeraPay's web site shall be governed by the laws of the Republic of Kenya without regard to its conflict of law provisions.
+
+          General Terms and Conditions applicable to Use of a Web Site.</p> </div>
+
+      </div>
+    </div>
+
+    
+
+
+   
 
     
   </div>
