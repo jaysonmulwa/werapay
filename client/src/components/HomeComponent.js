@@ -1,19 +1,13 @@
 import React, { Component, lazy } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import {
-	FormGroup,
-	Fade,
-	CustomInput,
-	
-} from "reactstrap";
+import { FormGroup, Fade, CustomInput } from "reactstrap";
 
 const NavAlt2ComponentLazy = lazy(() => import("./NavAlt2Component.js"));
 
 const JumboComponentLazy = lazy(() => import("./JumboComponent.js"));
 
 const FooterComponentLazy = lazy(() => import("./FooterComponent.js"));
-
 
 let endpoint = "http://localhost:5000";
 
@@ -69,15 +63,15 @@ class HomeComponent extends Component {
 
 		downloaded: false,
 
-		mail_sent:false,
+		mail_sent: false,
 
 		allowEmail: false,
 
-		send_to_name:"",
+		send_to_name: "",
 
 		send_to_email: "",
 
-		slip_name: ""
+		slip_name: "",
 	};
 
 	componentDidMount() {
@@ -111,8 +105,6 @@ class HomeComponent extends Component {
 
 		console.log(this.state);
 	};
-
-	
 
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
@@ -203,27 +195,19 @@ class HomeComponent extends Component {
 		});
 	};
 
-	handleAllowEmail = (e) =>{
-
+	handleAllowEmail = (e) => {
 		e.preventDefault();
 
 		this.setState({
 			mail_sent: false,
 			allowEmail: true,
 		});
+	};
 
-
-	}
-
-	handleSendAsMail = (e) =>{
-
+	handleSendAsMail = (e) => {
 		e.preventDefault();
 
-		const {
-			slip_name,
-			send_to_name,
-			send_to_email,
-		} = this.state;
+		const { slip_name, send_to_name, send_to_email } = this.state;
 
 		const newMail = new FormData();
 
@@ -248,19 +232,16 @@ class HomeComponent extends Component {
 		if (newMail) {
 			axios.post(link, newMail, config).then((res) => {
 				if (res.data !== "Failed") {
-
-					console.log(res.data);	
+					console.log(res.data);
 
 					this.setState({
-						allowEmail:false,
+						allowEmail: false,
 						mail_sent: true,
 					});
 				}
 			});
 		}
-
-
-	}
+	};
 
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -312,7 +293,6 @@ class HomeComponent extends Component {
 		newSlip.append("paycode_t", paycode_t);
 		newSlip.append("amount_t", amount_t);
 
-
 		this.setState({
 			downloaded: false,
 			mail_sent: false,
@@ -332,7 +312,6 @@ class HomeComponent extends Component {
 		if (newSlip) {
 			axios.post(link, newSlip, config).then((res) => {
 				if (res.data !== "Failed") {
-
 					console.log(res.data);
 
 					this.setState({
@@ -360,10 +339,7 @@ class HomeComponent extends Component {
 									name="paycode"
 									id="paycode"
 									placeholder="Item"
-									onChange={this.handleEarningsPaycodeChange.bind(
-										this,
-										i
-									)}
+									onChange={this.handleEarningsPaycodeChange.bind(this, i)}
 								/>
 							</div>
 
@@ -374,10 +350,7 @@ class HomeComponent extends Component {
 									name="amount"
 									id="amount"
 									placeholder="Amount (0.00)"
-									onChange={this.handleEarningsAmountChange.bind(
-										this,
-										i
-									)}
+									onChange={this.handleEarningsAmountChange.bind(this, i)}
 								/>
 							</div>
 
@@ -412,10 +385,7 @@ class HomeComponent extends Component {
 									name="paycode"
 									id="paycode"
 									placeholder="Item"
-									onChange={this.handleDeductionsPaycodeChange.bind(
-										this,
-										i
-									)}
+									onChange={this.handleDeductionsPaycodeChange.bind(this, i)}
 								/>
 							</div>
 
@@ -426,10 +396,7 @@ class HomeComponent extends Component {
 									name="amount"
 									id="amount"
 									placeholder="Amount (0.00)"
-									onChange={this.handleDeductionsAmountChange.bind(
-										this,
-										i
-									)}
+									onChange={this.handleDeductionsAmountChange.bind(this, i)}
 								/>
 							</div>
 
@@ -463,10 +430,7 @@ class HomeComponent extends Component {
 									name="paycode"
 									id="paycode"
 									placeholder="Item"
-									onChange={this.handleTaxPaycodeChange.bind(
-										this,
-										i
-									)}
+									onChange={this.handleTaxPaycodeChange.bind(this, i)}
 								/>
 							</div>
 
@@ -477,10 +441,7 @@ class HomeComponent extends Component {
 									name="amount"
 									id="amount"
 									placeholder="Amount (0.00)"
-									onChange={this.handleTaxAmountChange.bind(
-										this,
-										i
-									)}
+									onChange={this.handleTaxAmountChange.bind(this, i)}
 								/>
 							</div>
 
@@ -508,7 +469,7 @@ class HomeComponent extends Component {
 				<JumboComponentLazy />
 
 				{/*Earnings*/}
-				<section class="text-gray-700 body-font">
+				<section class="body-font">
 					<div class="container py-6 mx-auto flex">
 						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
 							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
@@ -633,7 +594,7 @@ class HomeComponent extends Component {
 								className="w-1/2 mb-4"
 							/>
 							<div className="">
-								<img
+								<img className="rounded-lg shadow-lg"
 									style={{
 										maxHeight: "8rem",
 									}}
@@ -803,25 +764,17 @@ class HomeComponent extends Component {
 										<option value="--">-- Select Month --</option>
 
 										<option value="JANUARY">January</option>
-										<option value="FEBRUARY">
-											February
-										</option>
+										<option value="FEBRUARY">February</option>
 										<option value="MARCH">March</option>
 										<option value="APRIL">April</option>
 										<option value="MAY">May</option>
 										<option value="JUNE">June</option>
 										<option value="JULY">July</option>
 										<option value="AUGUST">August</option>
-										<option value="SEPTEMBER">
-											September
-										</option>
+										<option value="SEPTEMBER">September</option>
 										<option value="OCTOBER">October</option>
-										<option value="NOVEMBER">
-											November
-										</option>
-										<option value="DECEMBER">
-											December
-										</option>
+										<option value="NOVEMBER">November</option>
+										<option value="DECEMBER">December</option>
 									</select>
 								</div>
 
@@ -882,16 +835,13 @@ class HomeComponent extends Component {
 								<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
 									<center>
 										<a
-											
-											href = { `http://localhost:5000/slips/${this.state.slip_name}` }
-
+											href={`http://localhost:5000/slips/${this.state.slip_name}`}
 											target="_blank"
 											download
 										>
 											Download File
-										</a> or 
-
-										
+										</a>{" "}
+										or
 										<button
 											class="rounded-lg mx-3 py-2 px-4 text-blue-600 bg-gray-100 hover:bg-luminous-blue hover:text-white focus:outline-none"
 											type="button"
@@ -900,8 +850,6 @@ class HomeComponent extends Component {
 										>
 											Send as Mail
 										</button>
-
-
 										{/*href="http://localhost:5000/slips/payslip.pdf"*/}
 										{/*href="/slips/payslip.pdf"*/}
 									</center>
@@ -912,76 +860,61 @@ class HomeComponent extends Component {
 				)}
 
 				{this.state.allowEmail && (
-
 					<Fade in={true} out={true}>
-					<section class="text-gray-700 body-font">
-						<div class="container py-6 mx-auto flex">
-							<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
-							<div class="flex flex-col md:flex-row -mx-3">
-								<div class="w-12/12 lg:w-5/12 px-3">
-								<input
-									class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline w-full"
-									type="text"
-									name="send_to_name"
-									id="send_to_name"
-									placeholder="Recepient Name"
-									onChange={this.onChange}
-								/>
+						<section class="text-gray-700 body-font">
+							<div class="container py-6 mx-auto flex">
+								<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+									<div class="flex flex-col md:flex-row -mx-3">
+										<div class="w-12/12 lg:w-5/12 px-3">
+											<input
+												class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline w-full"
+												type="text"
+												name="send_to_name"
+												id="send_to_name"
+												placeholder="Recepient Name"
+												onChange={this.onChange}
+											/>
+										</div>
+
+										<div class="w-12/12 md:w-5/12 px-3">
+											<input
+												class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline w-full"
+												type="email"
+												name="send_to_email"
+												id="send_to_email"
+												placeholder="Recepient Email Address"
+												onChange={this.onChange}
+											/>
+										</div>
+
+										<div class="w-1/12 md:w-3/12 px-3">
+											<button
+												class="rounded-lg mx-3 py-2 px-4 text-white bg-luminous-blue hover:bg-blue-600 focus:outline-none"
+												type="button"
+												value="Send as Mail"
+												onClick={(e) => this.handleSendAsMail(e)}
+											>
+												Send
+											</button>
+										</div>
+									</div>
 								</div>
-
-								<div class="w-12/12 md:w-5/12 px-3">
-								<input
-									class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline w-full"
-									type="email"
-									name="send_to_email"
-									id="send_to_email"
-									placeholder="Recepient Email Address"
-									onChange={this.onChange}
-								/>
-								</div>
-
-				
-
-							<div class="w-1/12 md:w-3/12 px-3">
-										<button
-											class="rounded-lg mx-3 py-2 px-4 text-white bg-luminous-blue hover:bg-blue-600 focus:outline-none"
-											type="button"
-											value="Send as Mail"
-											onClick={(e) => this.handleSendAsMail(e)}
-										>
-											Send
-									</button>
 							</div>
-						</div>
-							</div>
-						</div>
-
-						
-
-					</section>
+						</section>
 					</Fade>
-
-
 				)}
 
 				{this.state.mail_sent && (
-
 					<Fade in={true} out={true}>
-					<section class="text-gray-700 body-font">
-
-						<div class="container py-6 mx-auto flex">
-							<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
-								<center>
-									Sent!										
-								</center>
+						<section class="text-gray-700 body-font">
+							<div class="container py-6 mx-auto flex">
+								<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+									<center>Sent!</center>
+								</div>
 							</div>
-						</div>
-
-					</section>
+						</section>
 					</Fade>
-
 				)}
-
 
 				<FooterComponentLazy />
 			</div>

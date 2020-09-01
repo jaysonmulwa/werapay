@@ -1,120 +1,185 @@
-import React, { lazy } from "react";
+import React, { Component, lazy } from "react";
+import { withRouter } from "react-router-dom";
+import { Fade } from "reactstrap";
 
+import taxable from "taxable";
 
 const NavAlt2ComponentLazy = lazy(() => import("./../NavAlt2Component.js"));
 
 const FooterComponentLazy = lazy(() => import("./../FooterComponent.js"));
 
+class NssfComponent extends Component {
+	state = {
+		basic: 0.0,
+		rates: "",
+		tier: "",
+		nssf: "",
+		calculated: false,
+	};
 
-function TermsComponent(props) {
+	onChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
 
- 
+	handleOptionChange = (e) => {
+		this.setState({ tier: e.target.value });
+	};
 
-   return (
-        <div className="bg-gray-200">
+	handleSubmit = (e) => {
+		e.preventDefault();
 
-        <NavAlt2ComponentLazy />
-  
+		this.setState({
+			calculated: false,
+		});
 
-<section class="text-gray-700 body-font">
-  <div class="container px-5 py-24 mx-auto flex flex-wrap">
+		const { basic, rates, tier } = this.state;
 
-  <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Terms of Use</h1>
-    </div>
-  
-    <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
-      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-      </div>
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm">{/*1*/}</div>
-      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+		let rate = rates == "new" ? true : false;
 
+		let nssf = taxable.KE.NSSF({
+			amount: parseFloat(basic),
+			new_rates: rate,
+			tier: parseInt(tier),
+		});
 
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          {/*<h2 class="font-medium title-font text-gray-900 mb-1 text-xl">Shooting Stars</h2>*/}
-          <p class="leading-relaxed">Werapay recreates your payslip as accurately as possible, therefore enter the Payslip items as they appear on the Payslip.</p>
-        </div>
+		nssf = new Intl.NumberFormat().format(nssf);
 
-      </div>
-    </div>
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
-      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-      </div>
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
-      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-        
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">Exclude only totals (gross pay, net pay) and headings (Earnings, Deductions etc).{/* Werapay will calculate these automatically, alongside other calculations like PAYE, NSSF, NHIF.*/}</p>
-        </div>
-      </div>
-    </div>
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
-      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-      </div>
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
-      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-        
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">Click on the Add button. This gives a field for entering the Payslip Item and Amount. Enter these and repeat for all sections.</p>
-        </div>
-      </div>
-    </div>
+		this.setState({
+			nssf: nssf,
+		});
 
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
-      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-      </div>
+		this.setState({
+			calculated: true,
+		});
+	};
 
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
-      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-       
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">For example, under Earnings, enter Basic Pay in the item field and Enter the amount preferrably with cents - rounded off to two decimal place - as it will appear this way on the slip.</p>
-        </div>
+	render() {
+		return (
+			<div className="bg-gray-200">
+				<NavAlt2ComponentLazy />
+				<section class="pattern-dots-xl text-gray-300 body-font">
+					<div class="container px-5 py-12 mx-auto flex flex-wrap">
+						<h2 class="sm:text-4xl text-3xl text-gray-900 font-bold title-font mb-2 md:w-1/5">
+							NSSF
+						</h2>
+						<div class="md:w-4/5 md:pl-6 text-gray-700"></div>
+					</div>
+				</section>
 
-      </div>
-    </div>
+				<section class="text-gray-900 body-font">
+					<div class="container py-6 mx-auto flex">
+						<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+							<h2 class="text-gray-900 text-lg mb-1 font-medium title-font mb-5">
+								NSSF Calculator
+							</h2>
 
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
-      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-      </div>
+							<label
+								class="block text-gray-700 text-sm font-medium mb-2"
+								for="basic"
+							>
+								Gross Pay
+							</label>
 
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
-      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-       
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">Enter Company Details and Personal Details too as they are important to make the final slip detailed and accurate. Also include your company logo.</p>
-        </div>
+							<input
+								class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline"
+								type="number"
+								name="basic"
+								id="basic"
+								placeholder=""
+								onChange={this.onChange}
+							/>
 
-      </div>
-    </div>
+							<label
+								class="block text-gray-700 text-sm font-medium mb-2"
+								for="rates"
+							>
+								Rates
+							</label>
 
-    <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
-      <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-      </div>
+							<select
+								class="bg-white rounded border border-gray-400 text-base px-4 py-2 mb-4 focus:outline-none focus:shadow-outline w-full"
+								type="select"
+								name="rates"
+								id="rates"
+								placeholder=""
+								onChange={this.onChange}
+							>
+								<option value="--">-- Select Rates--</option>
 
-      <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm"></div>
-      <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-       
-        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <p class="leading-relaxed">After filling all fields, click Submit. A download link will appear to download your form.</p>
-        </div>
+								<option value="new">New Rates</option>
+								<option value="old">Old Rates</option>
+							</select>
+							{this.state.rates == "new" && (
+								<div>
+									<label
+										class="block text-gray-700 text-sm font-medium mb-2"
+										for="tier"
+									>
+										Tier
+									</label>
 
-      </div>
-    </div>
+									<div class="mt-2 bg-white rounded border border-gray-400 text-base px-4 py-4 mb-4 focus:outline-none focus:shadow-outline">
+										<label class="inline-flex items-center w-full md:w-1/2">
+											<input
+												type="radio"
+												class="form-radio"
+												name="tier"
+												id="1"
+												value="1"
+												onChange={this.handleOptionChange}
+											/>
+											<span class="ml-2">Tier I</span>
+										</label>
+										<label class="inline-flex items-center w-full md:w-1/2">
+											<input
+												type="radio"
+												class="form-radio"
+												name="tier"
+												id="2"
+												value="2"
+												onChange={this.handleOptionChange}
+											/>
+											<span class="ml-2">Tier I & II</span>
+										</label>
+									</div>
+								</div>
+							)}
 
-    
-  </div>
-</section>
-
-<FooterComponentLazy />
-      </div>
-    )
-  }
-
-export default TermsComponent;
+							<div class="flex flex-col w-full relative py-2">
+								<form onSubmit={this.handleSubmit}>
+									<center>
+										<div class="mb-2 mr-2">
+											<button
+												class="rounded-lg py-2 px-4 text-white bg-luminous-blue hover:bg-blue-600 focus:outline-none"
+												value="add more"
+												type="submit"
+											>
+												Calculate
+											</button>
+										</div>
+									</center>
+								</form>
+							</div>
+						</div>
+					</div>
+				</section>
+				{this.state.calculated && (
+					<Fade in={true} out={true}>
+						<section class="text-gray-700 body-font">
+							<div class="container py-3 mx-auto flex">
+								<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
+									<center>
+										NSSF ={" "}
+										<span className="font-medium">{this.state.nssf}</span>
+									</center>
+								</div>
+							</div>
+						</section>
+					</Fade>
+				)}
+				<FooterComponentLazy />
+			</div>
+		);
+	}
+}
+export default withRouter(NssfComponent);
