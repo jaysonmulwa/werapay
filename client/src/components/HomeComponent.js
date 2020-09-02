@@ -186,9 +186,9 @@ class HomeComponent extends Component {
 	handleDownload = (event) => {
 		event.preventDefault();
 
-		const link = endpoint + "/slips/payslip.pdf";
+		//const link = endpoint + "/slips/payslip.pdf";
 
-		//const link = "/slips/payslip.pdf";
+		const link = "/slips/payslip.pdf";
 
 		axios.get(link, "", "").then((res) => {
 			console.log(res);
@@ -219,8 +219,8 @@ class HomeComponent extends Component {
 			mail_sent: false,
 		});
 
-		const link = endpoint + "/api/v1/sendmail";
-		//const link = "/api/v1/sendmail";
+		//const link = endpoint + "/api/v1/sendmail";
+		const link = "/api/v1/sendmail";
 
 		const config = {
 			headers: {
@@ -299,8 +299,8 @@ class HomeComponent extends Component {
 			allowEmail: false,
 		});
 
-		const link = endpoint + "/api/v1/personalslip";
-		//const link = "/api/v1/personalslip";
+		//const link = endpoint + "/api/v1/personalslip";
+		const link = "/api/v1/personalslip";
 
 		const config = {
 			headers: {
@@ -835,7 +835,7 @@ class HomeComponent extends Component {
 								<div class="lg:w-8/12 md:w-8/12 bg-white rounded-lg p-8 flex flex-col w-full md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10  shadow-md">
 									<center>
 										<a
-											href={`http://localhost:5000/slips/${this.state.slip_name}`}
+											href={`/slips/${this.state.slip_name}`}
 											target="_blank"
 											download
 										>
