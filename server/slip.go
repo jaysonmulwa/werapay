@@ -71,6 +71,7 @@ type Response struct {
 func serveStatic(app *fiber.App) {
 
 	app.Static("/", "./build")
+	app.Static("/home", "./build")
 	app.Static("/slips", "./slips")
 
 	/**/
@@ -78,6 +79,14 @@ func serveStatic(app *fiber.App) {
 	app.Static("/pricing", "./build")
 	app.Static("/batch", "./build")
 	app.Static("/help", "./build")
+
+	/**/
+	app.Static("/terms", "./build")
+	app.Static("/privacy", "./build")
+	app.Static("/paye", "./build")
+	app.Static("/nssf", "./build")
+	app.Static("/nhif", "./build")
+
 	
 
 }
