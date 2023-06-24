@@ -14,3 +14,7 @@ USER appuser
 COPY --from=builder /build/ /app/
 WORKDIR /app
 CMD ["./werapay"]
+
+# Run the following commands to build and run the docker image
+# docker build -t werapay .
+# docker run -p 8080:8080 werapay
