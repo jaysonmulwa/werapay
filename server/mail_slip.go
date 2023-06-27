@@ -38,7 +38,7 @@ func addContent(send_name string, m *mail.SGMailV3, wg *sync.WaitGroup) {
 
 	defer wg.Done()
 
-	content := mail.NewContent("text/html", "<p>Sent By Werapay.</p>")
+	content := mail.NewContent("text/html", "<p>Sent By Salario.</p>")
 
 	m.AddContent(content)
 
@@ -96,7 +96,6 @@ func sendEmail(slip_name string, send_name string, send_email string) (string, e
 	go addAttachment(slip_name, m, &wg)
 
 	wg.Wait()
-
 
 	request := sendgrid.GetRequest(api_key, "/v3/mail/send", "https://api.sendgrid.com")
 	request.Method = "POST"
