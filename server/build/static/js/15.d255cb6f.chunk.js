@@ -1,2 +1,564 @@
-(this.webpackJsonpclient=this.webpackJsonpclient||[]).push([[15],{100:function(e,t,a){"use strict";a.r(t);var l=a(15),n=a(16),r=a(18),s=a(17),o=a(0),c=a.n(o),i=a(3),m=Object(o.lazy)((function(){return a.e(10).then(a.bind(null,97))})),d=function(e){Object(r.a)(a,e);var t=Object(s.a)(a);function a(){var e;Object(l.a)(this,a);for(var n=arguments.length,r=new Array(n),s=0;s<n;s++)r[s]=arguments[s];return(e=t.call.apply(t,[this].concat(r))).getStarted=function(t){e.props.history.push("/app")},e}return Object(n.a)(a,[{key:"render",value:function(){return c.a.createElement("div",{class:"bg-white"},c.a.createElement(m,null),c.a.createElement("section",{class:"text-gray-700 body-font"},c.a.createElement("div",{class:"relative container mx-auto flex px-5 py-5 md:flex-row flex-col items-center"},c.a.createElement("div",{class:"lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center"},c.a.createElement("h1",{class:"title-font sm:text-5xl text-5xl mb-4 font-bold text-luminous-blue"},"WeraPay",c.a.createElement("br",{class:"hidden lg:inline-block"})),c.a.createElement("p",{class:"leading-loose mb-2 title-font text-lg font-medium"},"Need to generate a quick payslip for personal use or payslips for your entire company?.",c.a.createElement("br",null),"Wera Pay will sort you out quick and easy."),c.a.createElement("div",{class:"flex flex-wrap lg:w-4/5 mb-4"},c.a.createElement("div",{class:"py-2 px-0 sm:w-1/2 w-full"},c.a.createElement("div",{class:"bg-transparent rounded flex h-full items-center"},c.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"3",class:"text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",viewBox:"0 0 24 24"},c.a.createElement("path",{d:"M22 11.08V12a10 10 0 11-5.93-9.14"}),c.a.createElement("path",{d:"M22 4L12 14.01l-3-3"})),c.a.createElement("span",{class:"title-font font-medium"},"Payslip Generation"))),c.a.createElement("div",{class:"py-2 px-0 sm:w-1/2 w-full"},c.a.createElement("div",{class:"bg-transparent rounded flex h-full items-center"},c.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"3",class:"text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",viewBox:"0 0 24 24"},c.a.createElement("path",{d:"M22 11.08V12a10 10 0 11-5.93-9.14"}),c.a.createElement("path",{d:"M22 4L12 14.01l-3-3"})),c.a.createElement("span",{class:"title-font font-medium"},"Batch Processing"))),c.a.createElement("div",{class:"py-2 px-0 sm:w-1/2 w-full"},c.a.createElement("div",{class:"bg-transparent rounded flex h-full items-center"},c.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"3",class:"text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",viewBox:"0 0 24 24"},c.a.createElement("path",{d:"M22 11.08V12a10 10 0 11-5.93-9.14"}),c.a.createElement("path",{d:"M22 4L12 14.01l-3-3"})),c.a.createElement("span",{class:"title-font font-medium"},"Email Payslips"))),c.a.createElement("div",{class:"py-2 px-0 sm:w-1/2 w-full"},c.a.createElement("div",{class:"bg-transparent rounded flex h-full items-center"},c.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"3",class:"text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",viewBox:"0 0 24 24"},c.a.createElement("path",{d:"M22 11.08V12a10 10 0 11-5.93-9.14"}),c.a.createElement("path",{d:"M22 4L12 14.01l-3-3"})),c.a.createElement("span",{class:"title-font font-medium"},"Tax Calculators")))),c.a.createElement("div",{class:"flex justify-center"},c.a.createElement("button",{class:"inline-flex text-white bg-luminous-blue border-0 py-3 px-12 focus:outline-none hover:bg-gray-600 rounded text-lg font-medium",type:"button",onClick:this.getStarted},"Get Started"))),c.a.createElement("div",{class:"lg:max-w-lg lg:w-full md:w-1/2 w-5/6 z-20"},c.a.createElement("img",{class:"object-cover object-center rounded",alt:"hero",src:"./16.png"})),c.a.createElement("div",{class:"absolute bottom-0 right-0 pattern-dots-xl text-gray-400 w-64 h-64 z-0"}))),c.a.createElement("section",{class:"text-gray-700 body-font"},c.a.createElement("div",{class:"container px-4 pb-4 mx-auto flex flex-wrap"},c.a.createElement("div",{class:"flex flex-wrap"},c.a.createElement("div",{class:"p-2 lg:w-1/3 md:w-full"},c.a.createElement("div",{class:"flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col"},c.a.createElement("div",{class:"w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0"},c.a.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",class:"icon icon-tabler icon-tabler-rocket",width:"44",height:"44",viewBox:"0 0 24 24","stroke-width":"1.5",stroke:"#0003ff",fill:"none","stroke-linecap":"round","stroke-linejoin":"round"},c.a.createElement("path",{stroke:"none",d:"M0 0h24v24H0z"}),c.a.createElement("path",{d:"M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"}),c.a.createElement("path",{d:"M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"}),c.a.createElement("circle",{cx:"15",cy:"9",r:"1"}))),c.a.createElement("div",{class:"flex-grow"},c.a.createElement("h2",{class:"text-gray-900 text-xl title-font font-bold mb-3"},"Fast"),c.a.createElement("p",{class:"leading-relaxed text-lg font-medium"},"Because we value time. Enjoy the blazing fast speed of our service.")))),c.a.createElement("div",{class:"p-2 lg:w-1/3 md:w-full"},c.a.createElement("div",{class:"flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col"},c.a.createElement("div",{class:"w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0"},c.a.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",class:"icon icon-tabler icon-tabler-thumb-up",width:"44",height:"44",viewBox:"0 0 24 24","stroke-width":"1.5",stroke:"#0003ff",fill:"none","stroke-linecap":"round","stroke-linejoin":"round"},c.a.createElement("path",{stroke:"none",d:"M0 0h24v24H0z"}),c.a.createElement("path",{d:"M7 11v 8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3"}))),c.a.createElement("div",{class:"flex-grow"},c.a.createElement("h2",{class:"text-gray-900 text-xl title-font font-bold mb-3"},"Easy"),c.a.createElement("p",{class:"leading-relaxed text-lg font-medium"},"As it should be. With a simple User interface, we keep you in mind.")))),c.a.createElement("div",{class:"p-2 lg:w-1/3 md:w-full"},c.a.createElement("div",{class:"flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col"},c.a.createElement("div",{class:"w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-luminous-blue flex-shrink-0"},c.a.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",class:"icon icon-tabler icon-tabler-anchor",width:"44",height:"44",viewBox:"0 0 24 24","stroke-width":"1.5",stroke:"#0003ff",fill:"none","stroke-linecap":"round","stroke-linejoin":"round"},c.a.createElement("path",{stroke:"none",d:"M0 0h24v24H0z"}),c.a.createElement("path",{d:"M12 9v12m-8 -8a8 8 0 0 0 16 0m1 0h-2m-14 0h-2"}),c.a.createElement("circle",{cx:"12",cy:"6",r:"3"}))),c.a.createElement("div",{class:"flex-grow"},c.a.createElement("h2",{class:"text-gray-900 text-xl title-font font-bold mb-3"},"Reliable"),c.a.createElement("p",{class:"leading-relaxed text-lg font-medium"},"We harness the power of technology to give you a timeless product."))))))),c.a.createElement("section",{class:"text-gray-700 body-font"},c.a.createElement("div",{class:"bg-gray-200","py-4":!0},c.a.createElement("div",{class:"container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"},c.a.createElement("p",{class:"text-gray-500 text-sm text-center sm:text-left"},"\xa9 2020 WeraPay \u2014",c.a.createElement("a",{href:"https://twitter.com/jaysonmulwa",rel:"noopener noreferrer",class:"text-gray-600 ml-1",target:"_blank"},"@jaysonmulwa")),c.a.createElement("span",{class:"inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start"},c.a.createElement("a",{href:"https://twitter.com/jaysonmulwa",class:"ml-3 text-gray-500"},c.a.createElement("svg",{fill:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2",class:"w-5 h-5",viewBox:"0 0 24 24"},c.a.createElement("path",{d:"M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"}))),c.a.createElement("a",{href:"https://linkedin.com/in/jaysonmulwa",class:"ml-3 text-gray-500"},c.a.createElement("svg",{fill:"currentColor",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"0",class:"w-5 h-5",viewBox:"0 0 24 24"},c.a.createElement("path",{stroke:"none",d:"M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"}),c.a.createElement("circle",{cx:"4",cy:"4",r:"2",stroke:"none"}))))))))}}]),a}(o.Component);t.default=Object(i.f)(d)}}]);
+(this.webpackJsonpclient = this.webpackJsonpclient || []).push([
+  [15],
+  {
+    100: function (e, t, a) {
+      "use strict";
+      a.r(t);
+      var l = a(15),
+        n = a(16),
+        r = a(18),
+        s = a(17),
+        o = a(0),
+        c = a.n(o),
+        i = a(3),
+        m = Object(o.lazy)(function () {
+          return a.e(10).then(a.bind(null, 97));
+        }),
+        d = (function (e) {
+          Object(r.a)(a, e);
+          var t = Object(s.a)(a);
+          function a() {
+            var e;
+            Object(l.a)(this, a);
+            for (var n = arguments.length, r = new Array(n), s = 0; s < n; s++)
+              r[s] = arguments[s];
+            return (
+              ((e = t.call.apply(t, [this].concat(r))).getStarted = function (
+                t
+              ) {
+                e.props.history.push("/app");
+              }),
+              e
+            );
+          }
+          return (
+            Object(n.a)(a, [
+              {
+                key: "render",
+                value: function () {
+                  return c.a.createElement(
+                    "div",
+                    { class: "bg-white" },
+                    c.a.createElement(m, null),
+                    c.a.createElement(
+                      "section",
+                      { class: "text-gray-700 body-font" },
+                      c.a.createElement(
+                        "div",
+                        {
+                          class:
+                            "relative container mx-auto flex px-5 py-5 md:flex-row flex-col items-center",
+                        },
+                        c.a.createElement(
+                          "div",
+                          {
+                            class:
+                              "lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center",
+                          },
+                          c.a.createElement(
+                            "h1",
+                            {
+                              class:
+                                "title-font sm:text-5xl text-5xl mb-4 font-bold text-luminous-blue",
+                            },
+                            "Salario",
+                            c.a.createElement("br", {
+                              class: "hidden lg:inline-block",
+                            })
+                          ),
+                          c.a.createElement(
+                            "p",
+                            {
+                              class:
+                                "leading-loose mb-2 title-font text-lg font-medium",
+                            },
+                            "Need to generate a quick payslip for personal use or payslips for your entire company?.",
+                            c.a.createElement("br", null),
+                            "Wera Pay will sort you out quick and easy."
+                          ),
+                          c.a.createElement(
+                            "div",
+                            { class: "flex flex-wrap lg:w-4/5 mb-4" },
+                            c.a.createElement(
+                              "div",
+                              { class: "py-2 px-0 sm:w-1/2 w-full" },
+                              c.a.createElement(
+                                "div",
+                                {
+                                  class:
+                                    "bg-transparent rounded flex h-full items-center",
+                                },
+                                c.a.createElement(
+                                  "svg",
+                                  {
+                                    fill: "none",
+                                    stroke: "currentColor",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                    "stroke-width": "3",
+                                    class:
+                                      "text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",
+                                    viewBox: "0 0 24 24",
+                                  },
+                                  c.a.createElement("path", {
+                                    d: "M22 11.08V12a10 10 0 11-5.93-9.14",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M22 4L12 14.01l-3-3",
+                                  })
+                                ),
+                                c.a.createElement(
+                                  "span",
+                                  { class: "title-font font-medium" },
+                                  "Payslip Generation"
+                                )
+                              )
+                            ),
+                            c.a.createElement(
+                              "div",
+                              { class: "py-2 px-0 sm:w-1/2 w-full" },
+                              c.a.createElement(
+                                "div",
+                                {
+                                  class:
+                                    "bg-transparent rounded flex h-full items-center",
+                                },
+                                c.a.createElement(
+                                  "svg",
+                                  {
+                                    fill: "none",
+                                    stroke: "currentColor",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                    "stroke-width": "3",
+                                    class:
+                                      "text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",
+                                    viewBox: "0 0 24 24",
+                                  },
+                                  c.a.createElement("path", {
+                                    d: "M22 11.08V12a10 10 0 11-5.93-9.14",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M22 4L12 14.01l-3-3",
+                                  })
+                                ),
+                                c.a.createElement(
+                                  "span",
+                                  { class: "title-font font-medium" },
+                                  "Batch Processing"
+                                )
+                              )
+                            ),
+                            c.a.createElement(
+                              "div",
+                              { class: "py-2 px-0 sm:w-1/2 w-full" },
+                              c.a.createElement(
+                                "div",
+                                {
+                                  class:
+                                    "bg-transparent rounded flex h-full items-center",
+                                },
+                                c.a.createElement(
+                                  "svg",
+                                  {
+                                    fill: "none",
+                                    stroke: "currentColor",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                    "stroke-width": "3",
+                                    class:
+                                      "text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",
+                                    viewBox: "0 0 24 24",
+                                  },
+                                  c.a.createElement("path", {
+                                    d: "M22 11.08V12a10 10 0 11-5.93-9.14",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M22 4L12 14.01l-3-3",
+                                  })
+                                ),
+                                c.a.createElement(
+                                  "span",
+                                  { class: "title-font font-medium" },
+                                  "Email Payslips"
+                                )
+                              )
+                            ),
+                            c.a.createElement(
+                              "div",
+                              { class: "py-2 px-0 sm:w-1/2 w-full" },
+                              c.a.createElement(
+                                "div",
+                                {
+                                  class:
+                                    "bg-transparent rounded flex h-full items-center",
+                                },
+                                c.a.createElement(
+                                  "svg",
+                                  {
+                                    fill: "none",
+                                    stroke: "currentColor",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                    "stroke-width": "3",
+                                    class:
+                                      "text-luminous-blue w-6 h-6 flex-shrink-0 mr-4",
+                                    viewBox: "0 0 24 24",
+                                  },
+                                  c.a.createElement("path", {
+                                    d: "M22 11.08V12a10 10 0 11-5.93-9.14",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M22 4L12 14.01l-3-3",
+                                  })
+                                ),
+                                c.a.createElement(
+                                  "span",
+                                  { class: "title-font font-medium" },
+                                  "Tax Calculators"
+                                )
+                              )
+                            )
+                          ),
+                          c.a.createElement(
+                            "div",
+                            { class: "flex justify-center" },
+                            c.a.createElement(
+                              "button",
+                              {
+                                class:
+                                  "inline-flex text-white bg-luminous-blue border-0 py-3 px-12 focus:outline-none hover:bg-gray-600 rounded text-lg font-medium",
+                                type: "button",
+                                onClick: this.getStarted,
+                              },
+                              "Get Started"
+                            )
+                          )
+                        ),
+                        c.a.createElement(
+                          "div",
+                          {
+                            class: "lg:max-w-lg lg:w-full md:w-1/2 w-5/6 z-20",
+                          },
+                          c.a.createElement("img", {
+                            class: "object-cover object-center rounded",
+                            alt: "hero",
+                            src: "./16.png",
+                          })
+                        ),
+                        c.a.createElement("div", {
+                          class:
+                            "absolute bottom-0 right-0 pattern-dots-xl text-gray-400 w-64 h-64 z-0",
+                        })
+                      )
+                    ),
+                    c.a.createElement(
+                      "section",
+                      { class: "text-gray-700 body-font" },
+                      c.a.createElement(
+                        "div",
+                        { class: "container px-4 pb-4 mx-auto flex flex-wrap" },
+                        c.a.createElement(
+                          "div",
+                          { class: "flex flex-wrap" },
+                          c.a.createElement(
+                            "div",
+                            { class: "p-2 lg:w-1/3 md:w-full" },
+                            c.a.createElement(
+                              "div",
+                              {
+                                class:
+                                  "flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col",
+                              },
+                              c.a.createElement(
+                                "div",
+                                {
+                                  class:
+                                    "w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0",
+                                },
+                                c.a.createElement(
+                                  "svg",
+                                  {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    class:
+                                      "icon icon-tabler icon-tabler-rocket",
+                                    width: "44",
+                                    height: "44",
+                                    viewBox: "0 0 24 24",
+                                    "stroke-width": "1.5",
+                                    stroke: "#0003ff",
+                                    fill: "none",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                  },
+                                  c.a.createElement("path", {
+                                    stroke: "none",
+                                    d: "M0 0h24v24H0z",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3",
+                                  }),
+                                  c.a.createElement("circle", {
+                                    cx: "15",
+                                    cy: "9",
+                                    r: "1",
+                                  })
+                                )
+                              ),
+                              c.a.createElement(
+                                "div",
+                                { class: "flex-grow" },
+                                c.a.createElement(
+                                  "h2",
+                                  {
+                                    class:
+                                      "text-gray-900 text-xl title-font font-bold mb-3",
+                                  },
+                                  "Fast"
+                                ),
+                                c.a.createElement(
+                                  "p",
+                                  {
+                                    class:
+                                      "leading-relaxed text-lg font-medium",
+                                  },
+                                  "Because we value time. Enjoy the blazing fast speed of our service."
+                                )
+                              )
+                            )
+                          ),
+                          c.a.createElement(
+                            "div",
+                            { class: "p-2 lg:w-1/3 md:w-full" },
+                            c.a.createElement(
+                              "div",
+                              {
+                                class:
+                                  "flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col",
+                              },
+                              c.a.createElement(
+                                "div",
+                                {
+                                  class:
+                                    "w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0",
+                                },
+                                c.a.createElement(
+                                  "svg",
+                                  {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    class:
+                                      "icon icon-tabler icon-tabler-thumb-up",
+                                    width: "44",
+                                    height: "44",
+                                    viewBox: "0 0 24 24",
+                                    "stroke-width": "1.5",
+                                    stroke: "#0003ff",
+                                    fill: "none",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                  },
+                                  c.a.createElement("path", {
+                                    stroke: "none",
+                                    d: "M0 0h24v24H0z",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M7 11v 8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3",
+                                  })
+                                )
+                              ),
+                              c.a.createElement(
+                                "div",
+                                { class: "flex-grow" },
+                                c.a.createElement(
+                                  "h2",
+                                  {
+                                    class:
+                                      "text-gray-900 text-xl title-font font-bold mb-3",
+                                  },
+                                  "Easy"
+                                ),
+                                c.a.createElement(
+                                  "p",
+                                  {
+                                    class:
+                                      "leading-relaxed text-lg font-medium",
+                                  },
+                                  "As it should be. With a simple User interface, we keep you in mind."
+                                )
+                              )
+                            )
+                          ),
+                          c.a.createElement(
+                            "div",
+                            { class: "p-2 lg:w-1/3 md:w-full" },
+                            c.a.createElement(
+                              "div",
+                              {
+                                class:
+                                  "flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col",
+                              },
+                              c.a.createElement(
+                                "div",
+                                {
+                                  class:
+                                    "w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-luminous-blue flex-shrink-0",
+                                },
+                                c.a.createElement(
+                                  "svg",
+                                  {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    class:
+                                      "icon icon-tabler icon-tabler-anchor",
+                                    width: "44",
+                                    height: "44",
+                                    viewBox: "0 0 24 24",
+                                    "stroke-width": "1.5",
+                                    stroke: "#0003ff",
+                                    fill: "none",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                  },
+                                  c.a.createElement("path", {
+                                    stroke: "none",
+                                    d: "M0 0h24v24H0z",
+                                  }),
+                                  c.a.createElement("path", {
+                                    d: "M12 9v12m-8 -8a8 8 0 0 0 16 0m1 0h-2m-14 0h-2",
+                                  }),
+                                  c.a.createElement("circle", {
+                                    cx: "12",
+                                    cy: "6",
+                                    r: "3",
+                                  })
+                                )
+                              ),
+                              c.a.createElement(
+                                "div",
+                                { class: "flex-grow" },
+                                c.a.createElement(
+                                  "h2",
+                                  {
+                                    class:
+                                      "text-gray-900 text-xl title-font font-bold mb-3",
+                                  },
+                                  "Reliable"
+                                ),
+                                c.a.createElement(
+                                  "p",
+                                  {
+                                    class:
+                                      "leading-relaxed text-lg font-medium",
+                                  },
+                                  "We harness the power of technology to give you a timeless product."
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    ),
+                    c.a.createElement(
+                      "section",
+                      { class: "text-gray-700 body-font" },
+                      c.a.createElement(
+                        "div",
+                        { class: "bg-gray-200", "py-4": !0 },
+                        c.a.createElement(
+                          "div",
+                          {
+                            class:
+                              "container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row",
+                          },
+                          c.a.createElement(
+                            "p",
+                            {
+                              class:
+                                "text-gray-500 text-sm text-center sm:text-left",
+                            },
+                            "\xa9 2020 Salario \u2014",
+                            c.a.createElement(
+                              "a",
+                              {
+                                href: "https://twitter.com/jaysonmulwa",
+                                rel: "noopener noreferrer",
+                                class: "text-gray-600 ml-1",
+                                target: "_blank",
+                              },
+                              "@jaysonmulwa"
+                            )
+                          ),
+                          c.a.createElement(
+                            "span",
+                            {
+                              class:
+                                "inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start",
+                            },
+                            c.a.createElement(
+                              "a",
+                              {
+                                href: "https://twitter.com/jaysonmulwa",
+                                class: "ml-3 text-gray-500",
+                              },
+                              c.a.createElement(
+                                "svg",
+                                {
+                                  fill: "currentColor",
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round",
+                                  "stroke-width": "2",
+                                  class: "w-5 h-5",
+                                  viewBox: "0 0 24 24",
+                                },
+                                c.a.createElement("path", {
+                                  d: "M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z",
+                                })
+                              )
+                            ),
+                            c.a.createElement(
+                              "a",
+                              {
+                                href: "https://linkedin.com/in/jaysonmulwa",
+                                class: "ml-3 text-gray-500",
+                              },
+                              c.a.createElement(
+                                "svg",
+                                {
+                                  fill: "currentColor",
+                                  stroke: "currentColor",
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round",
+                                  "stroke-width": "0",
+                                  class: "w-5 h-5",
+                                  viewBox: "0 0 24 24",
+                                },
+                                c.a.createElement("path", {
+                                  stroke: "none",
+                                  d: "M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z",
+                                }),
+                                c.a.createElement("circle", {
+                                  cx: "4",
+                                  cy: "4",
+                                  r: "2",
+                                  stroke: "none",
+                                })
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  );
+                },
+              },
+            ]),
+            a
+          );
+        })(o.Component);
+      t.default = Object(i.f)(d);
+    },
+  },
+]);
 //# sourceMappingURL=15.d255cb6f.chunk.js.map

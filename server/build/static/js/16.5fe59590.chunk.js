@@ -1,2 +1,281 @@
-(this.webpackJsonpclient=this.webpackJsonpclient||[]).push([[16],{103:function(e,t,l){"use strict";l.r(t);var r=l(0),n=l.n(r),a=Object(r.lazy)((function(){return l.e(1).then(l.bind(null,42))})),s=Object(r.lazy)((function(){return l.e(0).then(l.bind(null,43))}));t.default=function(e){return n.a.createElement("div",{className:"bg-gray-200"},n.a.createElement(a,null),n.a.createElement("section",{class:"pattern-dots-xl text-gray-300 body-font"},n.a.createElement("div",{class:"container px-5 py-12 mx-auto flex flex-wrap"},n.a.createElement("h2",{class:"sm:text-4xl text-3xl text-gray-900 font-bold title-font mb-2 md:w-1/5"},"Pricing"),n.a.createElement("div",{class:"md:w-4/5 md:pl-6 text-gray-700"}))),n.a.createElement("section",{class:"text-gray-700 body-font overflow-hidden"},n.a.createElement("div",{class:"container px-5 py-12 mx-auto"},n.a.createElement("div",{class:"flex flex-wrap mx-auto"},n.a.createElement("div",{class:"p-4 xl:w-1/2 md:w-1/2 w-full items-center "},n.a.createElement("div",{class:"h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden bg-white"},n.a.createElement("h2",{class:"text-sm tracking-widest title-font mb-1 font-medium"},"START"),n.a.createElement("h1",{class:"text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none"},"Free"),n.a.createElement("p",{class:"flex items-center text-gray-600 mb-2"},n.a.createElement("span",{class:"w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0"},n.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2.5",class:"w-3 h-3",viewBox:"0 0 24 24"},n.a.createElement("path",{d:"M20 6L9 17l-5-5"}))),"Free for Personal Slip Generation"),n.a.createElement("p",{class:"flex items-center text-gray-600 mb-2"},n.a.createElement("span",{class:"w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0"},n.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2.5",class:"w-3 h-3",viewBox:"0 0 24 24"},n.a.createElement("path",{d:"M20 6L9 17l-5-5"}))),"No Limit"))),n.a.createElement("div",{class:"p-4 xl:w-1/2 md:w-1/2 w-full"},n.a.createElement("div",{class:"h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden bg-white"},n.a.createElement("h2",{class:"text-sm tracking-widest title-font mb-1 font-medium"},"BUSINESS"),n.a.createElement("h1",{class:"text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200"},n.a.createElement("span",null,n.a.createElement("span",{class:"text-lg ml-1 font-normal text-gray-500"},"from")," ","KES 995"),n.a.createElement("span",{class:"text-lg ml-1 font-normal text-gray-500"},"/mo")),n.a.createElement("p",{class:"flex items-center text-gray-600 mb-2"},n.a.createElement("span",{class:"w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0"},n.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2.5",class:"w-3 h-3",viewBox:"0 0 24 24"},n.a.createElement("path",{d:"M20 6L9 17l-5-5"}))),"Includes Batch Processing"),n.a.createElement("p",{class:"flex items-center text-gray-600 mb-2"},n.a.createElement("span",{class:"w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0"},n.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2.5",class:"w-3 h-3",viewBox:"0 0 24 24"},n.a.createElement("path",{d:"M20 6L9 17l-5-5"}))),"Customer Support"),n.a.createElement("p",{class:"flex items-center text-gray-600 mb-2"},n.a.createElement("span",{class:"w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0"},n.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2.5",class:"w-3 h-3",viewBox:"0 0 24 24"},n.a.createElement("path",{d:"M20 6L9 17l-5-5"}))),"No Limit"),n.a.createElement("p",{class:"flex items-center text-gray-600 mb-2"},n.a.createElement("span",{class:"w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0"},n.a.createElement("svg",{fill:"none",stroke:"currentColor","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2.5",class:"w-3 h-3",viewBox:"0 0 24 24"},n.a.createElement("path",{d:"M20 6L9 17l-5-5"}))),"You can outsource payslip processing to Werapay"),n.a.createElement("p",{class:"text-xs text-gray-500 mt-3"},"Contact me for a quotation.")))))),n.a.createElement(s,null))}}}]);
+(this.webpackJsonpclient = this.webpackJsonpclient || []).push([
+  [16],
+  {
+    103: function (e, t, l) {
+      "use strict";
+      l.r(t);
+      var r = l(0),
+        n = l.n(r),
+        a = Object(r.lazy)(function () {
+          return l.e(1).then(l.bind(null, 42));
+        }),
+        s = Object(r.lazy)(function () {
+          return l.e(0).then(l.bind(null, 43));
+        });
+      t.default = function (e) {
+        return n.a.createElement(
+          "div",
+          { className: "bg-gray-200" },
+          n.a.createElement(a, null),
+          n.a.createElement(
+            "section",
+            { class: "pattern-dots-xl text-gray-300 body-font" },
+            n.a.createElement(
+              "div",
+              { class: "container px-5 py-12 mx-auto flex flex-wrap" },
+              n.a.createElement(
+                "h2",
+                {
+                  class:
+                    "sm:text-4xl text-3xl text-gray-900 font-bold title-font mb-2 md:w-1/5",
+                },
+                "Pricing"
+              ),
+              n.a.createElement("div", {
+                class: "md:w-4/5 md:pl-6 text-gray-700",
+              })
+            )
+          ),
+          n.a.createElement(
+            "section",
+            { class: "text-gray-700 body-font overflow-hidden" },
+            n.a.createElement(
+              "div",
+              { class: "container px-5 py-12 mx-auto" },
+              n.a.createElement(
+                "div",
+                { class: "flex flex-wrap mx-auto" },
+                n.a.createElement(
+                  "div",
+                  { class: "p-4 xl:w-1/2 md:w-1/2 w-full items-center " },
+                  n.a.createElement(
+                    "div",
+                    {
+                      class:
+                        "h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden bg-white",
+                    },
+                    n.a.createElement(
+                      "h2",
+                      {
+                        class:
+                          "text-sm tracking-widest title-font mb-1 font-medium",
+                      },
+                      "START"
+                    ),
+                    n.a.createElement(
+                      "h1",
+                      {
+                        class:
+                          "text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none",
+                      },
+                      "Free"
+                    ),
+                    n.a.createElement(
+                      "p",
+                      { class: "flex items-center text-gray-600 mb-2" },
+                      n.a.createElement(
+                        "span",
+                        {
+                          class:
+                            "w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0",
+                        },
+                        n.a.createElement(
+                          "svg",
+                          {
+                            fill: "none",
+                            stroke: "currentColor",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2.5",
+                            class: "w-3 h-3",
+                            viewBox: "0 0 24 24",
+                          },
+                          n.a.createElement("path", { d: "M20 6L9 17l-5-5" })
+                        )
+                      ),
+                      "Free for Personal Slip Generation"
+                    ),
+                    n.a.createElement(
+                      "p",
+                      { class: "flex items-center text-gray-600 mb-2" },
+                      n.a.createElement(
+                        "span",
+                        {
+                          class:
+                            "w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0",
+                        },
+                        n.a.createElement(
+                          "svg",
+                          {
+                            fill: "none",
+                            stroke: "currentColor",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2.5",
+                            class: "w-3 h-3",
+                            viewBox: "0 0 24 24",
+                          },
+                          n.a.createElement("path", { d: "M20 6L9 17l-5-5" })
+                        )
+                      ),
+                      "No Limit"
+                    )
+                  )
+                ),
+                n.a.createElement(
+                  "div",
+                  { class: "p-4 xl:w-1/2 md:w-1/2 w-full" },
+                  n.a.createElement(
+                    "div",
+                    {
+                      class:
+                        "h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden bg-white",
+                    },
+                    n.a.createElement(
+                      "h2",
+                      {
+                        class:
+                          "text-sm tracking-widest title-font mb-1 font-medium",
+                      },
+                      "BUSINESS"
+                    ),
+                    n.a.createElement(
+                      "h1",
+                      {
+                        class:
+                          "text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200",
+                      },
+                      n.a.createElement(
+                        "span",
+                        null,
+                        n.a.createElement(
+                          "span",
+                          { class: "text-lg ml-1 font-normal text-gray-500" },
+                          "from"
+                        ),
+                        " ",
+                        "KES 995"
+                      ),
+                      n.a.createElement(
+                        "span",
+                        { class: "text-lg ml-1 font-normal text-gray-500" },
+                        "/mo"
+                      )
+                    ),
+                    n.a.createElement(
+                      "p",
+                      { class: "flex items-center text-gray-600 mb-2" },
+                      n.a.createElement(
+                        "span",
+                        {
+                          class:
+                            "w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0",
+                        },
+                        n.a.createElement(
+                          "svg",
+                          {
+                            fill: "none",
+                            stroke: "currentColor",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2.5",
+                            class: "w-3 h-3",
+                            viewBox: "0 0 24 24",
+                          },
+                          n.a.createElement("path", { d: "M20 6L9 17l-5-5" })
+                        )
+                      ),
+                      "Includes Batch Processing"
+                    ),
+                    n.a.createElement(
+                      "p",
+                      { class: "flex items-center text-gray-600 mb-2" },
+                      n.a.createElement(
+                        "span",
+                        {
+                          class:
+                            "w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0",
+                        },
+                        n.a.createElement(
+                          "svg",
+                          {
+                            fill: "none",
+                            stroke: "currentColor",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2.5",
+                            class: "w-3 h-3",
+                            viewBox: "0 0 24 24",
+                          },
+                          n.a.createElement("path", { d: "M20 6L9 17l-5-5" })
+                        )
+                      ),
+                      "Customer Support"
+                    ),
+                    n.a.createElement(
+                      "p",
+                      { class: "flex items-center text-gray-600 mb-2" },
+                      n.a.createElement(
+                        "span",
+                        {
+                          class:
+                            "w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0",
+                        },
+                        n.a.createElement(
+                          "svg",
+                          {
+                            fill: "none",
+                            stroke: "currentColor",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2.5",
+                            class: "w-3 h-3",
+                            viewBox: "0 0 24 24",
+                          },
+                          n.a.createElement("path", { d: "M20 6L9 17l-5-5" })
+                        )
+                      ),
+                      "No Limit"
+                    ),
+                    n.a.createElement(
+                      "p",
+                      { class: "flex items-center text-gray-600 mb-2" },
+                      n.a.createElement(
+                        "span",
+                        {
+                          class:
+                            "w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0",
+                        },
+                        n.a.createElement(
+                          "svg",
+                          {
+                            fill: "none",
+                            stroke: "currentColor",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2.5",
+                            class: "w-3 h-3",
+                            viewBox: "0 0 24 24",
+                          },
+                          n.a.createElement("path", { d: "M20 6L9 17l-5-5" })
+                        )
+                      ),
+                      "You can outsource payslip processing to Salario"
+                    ),
+                    n.a.createElement(
+                      "p",
+                      { class: "text-xs text-gray-500 mt-3" },
+                      "Contact me for a quotation."
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          n.a.createElement(s, null)
+        );
+      };
+    },
+  },
+]);
 //# sourceMappingURL=16.5fe59590.chunk.js.map
