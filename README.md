@@ -1,4 +1,4 @@
-## Salario
+## Werapay 
 
 Wera is a Sheng' (Swahili-English Kenyan slang) word that means `work`. Therefore, Wera Pay translates to Work Pay.
 
